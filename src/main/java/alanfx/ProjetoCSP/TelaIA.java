@@ -48,15 +48,12 @@ public class TelaIA extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        AddRestricao = new javax.swing.JButton();
-        RestricaoBox = new javax.swing.JComboBox<>();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        TableRestricao = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         TableProfMat = new javax.swing.JTable();
         TextAddMateria = new javax.swing.JTextField();
@@ -77,33 +74,20 @@ public class TelaIA extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        TextResticao = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         HorariosFixosList = new javax.swing.JList<>();
+        AlgoritmoComboBox = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        CBHorarioDiferente = new javax.swing.JCheckBox();
+        CBProfessorDiferente = new javax.swing.JCheckBox();
+        CBPreferenciaDisciplina = new javax.swing.JCheckBox();
+        CBHorarioFixo = new javax.swing.JCheckBox();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Alocação de Professores");
         setResizable(false);
-
-        AddRestricao.setText("AddRestricao");
-        AddRestricao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddRestricaoActionPerformed(evt);
-            }
-        });
-
-        RestricaoBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ProfessorDiferente", "PreferenciaDisciplina" }));
-        RestricaoBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                RestricaoBoxItemStateChanged(evt);
-            }
-        });
-        RestricaoBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RestricaoBoxActionPerformed(evt);
-            }
-        });
 
         jTable2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -113,7 +97,7 @@ public class TelaIA extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Segunda", "Ter�a", "Quarta", "Quinta", "Sexta"
+                "Segunda", "Terça", "Quarta", "Quinta", "Sexta"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -140,33 +124,6 @@ public class TelaIA extends javax.swing.JFrame {
         jLabel3.setText("17:00");
 
         jLabel4.setText("21:00");
-
-        TableRestricao.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Restri��es Adicionadas"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TableRestricao.getTableHeader().setResizingAllowed(false);
-        TableRestricao.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(TableRestricao);
-        if (TableRestricao.getColumnModel().getColumnCount() > 0) {
-            TableRestricao.getColumnModel().getColumn(0).setResizable(false);
-        }
 
         TableProfMat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -227,7 +184,7 @@ public class TelaIA extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Materias Adicionadas", "Creditos", "Hor�rioFixo"
+                "Materias Adicionadas", "Creditos", "HorárioFixo"
             }
         ) {
             Class[] types = new Class [] {
@@ -290,7 +247,7 @@ public class TelaIA extends javax.swing.JFrame {
         jLabel7.setText("Materia");
 
         AlocHorario.setBackground(new java.awt.Color(255, 0, 0));
-        AlocHorario.setText("Alocar Hor�rios");
+        AlocHorario.setText("Alocar Horários");
         AlocHorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AlocHorarioActionPerformed(evt);
@@ -307,14 +264,46 @@ public class TelaIA extends javax.swing.JFrame {
 
         jLabel9.setText("Horarios Fixos");
 
-        jLabel10.setText("Materia");
-
         HorariosFixosList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "N/A", "SEG17", "SEG19", "SEG21", "TER17", "TER19", "TER21", "QUA17", "QUA19", "QUA21", "QUI17", "QUI19", "QUI21", "SEX17", "SEX19", "SEX21", " " };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(HorariosFixosList);
+
+        AlgoritmoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MinConflictsSolver", "Backtracking + MRV & DEG + LCV + AC3", "Backtracking + MRV & DEG", "Backtracking" }));
+        AlgoritmoComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlgoritmoComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Algoritmo");
+
+        CBHorarioDiferente.setText("Horário Diferente");
+        CBHorarioDiferente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBHorarioDiferenteActionPerformed(evt);
+            }
+        });
+
+        CBProfessorDiferente.setText("Professor Diferente");
+
+        CBPreferenciaDisciplina.setText("Preferência Disciplina");
+        CBPreferenciaDisciplina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBPreferenciaDisciplinaActionPerformed(evt);
+            }
+        });
+
+        CBHorarioFixo.setText("Horário Fixo");
+        CBHorarioFixo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBHorarioFixoActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Restrições");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -323,7 +312,7 @@ public class TelaIA extends javax.swing.JFrame {
             .addComponent(jScrollPane4)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -347,11 +336,39 @@ public class TelaIA extends javax.swing.JFrame {
                                 .addComponent(TextPrefMat, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(AddPreferenciaMat))
-                            .addComponent(jLabel6))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CBProfessorDiferente)
+                                    .addComponent(CBHorarioDiferente)
+                                    .addComponent(CBPreferenciaDisciplina)
+                                    .addComponent(CBHorarioFixo)
+                                    .addComponent(jLabel10))
+                                .addComponent(jLabel6)))
                         .addGap(22, 22, 22))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(AlocHorario)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(AlgoritmoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11)))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(333, 333, 333))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TextAddMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7))
@@ -364,80 +381,45 @@ public class TelaIA extends javax.swing.JFrame {
                                     .addComponent(jLabel9)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(ButtonAddMateria)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(RestricaoBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(TextResticao)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(AddRestricao)))))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AlocHorario)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(ButtonAddMateria)))
                         .addGap(14, 14, 14))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AlgoritmoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(AlocHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(jButton2)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(23, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(12, 12, 12))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(RestricaoBox, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(AddRestricao, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TextResticao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ButtonAddMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(ButtonAddMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel7)
@@ -448,9 +430,18 @@ public class TelaIA extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(TextAddMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(TextAddMateriaCred, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 14, Short.MAX_VALUE)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 6, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(CBHorarioDiferente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(CBProfessorDiferente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CBPreferenciaDisciplina)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CBHorarioFixo)))))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel5)
@@ -470,6 +461,9 @@ public class TelaIA extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private static List<Variable> variaveis;
+    private static List<List<String>> valores;
 
     public List<Professor> getProfessores (){
         List <Professor> professores = new ArrayList<>();
@@ -524,32 +518,15 @@ public class TelaIA extends javax.swing.JFrame {
         }
     }
 
-    private void AddRestricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddRestricaoActionPerformed
-    /*String newrestri = RestricaoBox.getSelectedItem().toString(); 
-    for(int i=0 ; i<3 ; i++){
-         if(TableRestricao.getValueAt(i,0) == null || (TableRestricao.getValueAt(i,0).equals(newrestri))){
-             TableRestricao.setValueAt(newrestri,i,0);
-             break;
-         }         
-     }        
-    System.out.println(newrestri);
-        */
-    // TODO add your handling code here:
-    }//GEN-LAST:event_AddRestricaoActionPerformed
-
-    private void RestricaoBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestricaoBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RestricaoBoxActionPerformed
-
     private void AddProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddProfessorActionPerformed
-     String newprof = TextAddProfessor.getText();
-     
-     for(int i=0 ; i<15 ; i++){
-         if(TableProfMat.getValueAt(i,0) == null || (TableProfMat.getValueAt(i,0).equals(newprof))){
-             TableProfMat.setValueAt(newprof,i,0);
-             break;
-         }         
-     }
+         String newprof = TextAddProfessor.getText();
+
+        for(int i=0 ; i<15 ; i++){
+            if(TableProfMat.getValueAt(i,0) == null || (TableProfMat.getValueAt(i,0).equals(newprof))){
+                TableProfMat.setValueAt(newprof,i,0);
+                break;
+            }
+        }
 
     }//GEN-LAST:event_AddProfessorActionPerformed
 
@@ -566,7 +543,6 @@ public class TelaIA extends javax.swing.JFrame {
                 }
             }
         }
-       // TODO add your handling code here:
     }//GEN-LAST:event_ButtonAddMateriaActionPerformed
 
     private void AddPreferenciaMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddPreferenciaMatActionPerformed
@@ -590,22 +566,20 @@ public class TelaIA extends javax.swing.JFrame {
                 }             
             }         
         }
-      
-    
-        
-        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_AddPreferenciaMatActionPerformed
 
     private void TextAddProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextAddProfessorActionPerformed
-            // TODO add your handling code here:
+
     }//GEN-LAST:event_TextAddProfessorActionPerformed
 
     private void TextPrefMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPrefMatActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_TextPrefMatActionPerformed
 
     private void TextPrefMat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPrefMat1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_TextPrefMat1ActionPerformed
 
     private void AlocHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlocHorarioActionPerformed
@@ -614,34 +588,112 @@ public class TelaIA extends javax.swing.JFrame {
         professores.addAll(getProfessores());
         disciplinas.addAll(getMaterias());
         getPreferencias(professores);
-        String algorit = "MinConflictsSolver"; //Exemplo algoritmo selecionado
-        List<Variable> variaveis;
-        List<List<String>> valores;
+        String algorit = AlgoritmoComboBox.getSelectedItem().toString(); //Exemplo algoritmo selecionado
         variaveis = AlocCSP.criarVariaveis(disciplinas);
         valores = AlocCSP.createValues(AlocCSP.criarProfessores(professores), AlocCSP.aulas);
         CspListener.StepCounter<Variable, List<String>> stepCounter = new CspListener.StepCounter<>();
-        CspSolver<Variable, List<String>> solver;
+        Set<Optional<Assignment<Variable, List<String>>>> solucoesList = //usar essa lista pra exibir os resultados na interface
+                usarAlgoritmo(algorit, stepCounter);
+        /*CspSolver<Variable, List<String>> solver;
         solver = new MinConflictsSolver<>(1000);
         solver.addCspListener(stepCounter);
         stepCounter.reset();
         Optional<Assignment<Variable, List<String>>> solution;
         Set<Optional<Assignment<Variable, List<String>>>> set = new HashSet<>();
+
         for (Variable var : variaveis) {
             for (List<String> val : valores) {
-                CSP<Variable, List<String>> csp = new AlocCSP(disciplinas, professores, get, new ValorAtribuido<>(var, val));
+                CSP<Variable, List<String>> csp = new AlocCSP(disciplinas, professores, getRestricoes(), new ValorAtribuido<>(var, val));
                 solution = solver.solve(csp);
                 set.add(solution);
             }
         }
         Set<Optional<Assignment<Variable, List<String>>>> solucoesList =  set;
+        */
+
+
     }//GEN-LAST:event_AlocHorarioActionPerformed
 
+    private Set<Optional<Assignment<Variable, List<String>>>> usarAlgoritmo(String algorit,
+                                                                                   CspListener.StepCounter<Variable, List<String>> stepCounter) {
+        CspSolver<Variable, List<String>> solver;
+        switch(algorit) {
+            case "MinConflictsSolver":
+                solver = new MinConflictsSolver<>(1000);
+                solver.addCspListener(stepCounter);
+                stepCounter.reset();
 
-    private void RestricaoBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_RestricaoBoxItemStateChanged
-        //if (RestricaoBox.getSelectedItem() != "HorarioFixo"){
-        //    ComboBoxHorario.setVisible(false);
-        //} else ComboBoxHorario.setVisible(true);
-    }//GEN-LAST:event_RestricaoBoxItemStateChanged
+                return getSolucoes(solver);
+            case "Backtracking + MRV & DEG + LCV + AC3":
+                solver = new FlexibleBacktrackingSolver<Variable, List<String>>().setAll();
+                solver.addCspListener(stepCounter);
+                stepCounter.reset();
+
+                return getSolucoes(solver);
+            case "Backtracking + MRV & DEG":
+                solver = new FlexibleBacktrackingSolver<Variable, List<String>>().set(CspHeuristics.mrvDeg());
+                solver.addCspListener(stepCounter);
+                stepCounter.reset();
+
+                return getSolucoes(solver);
+            case "Backtracking":
+                solver = new FlexibleBacktrackingSolver<>();
+                solver.addCspListener(stepCounter);
+                stepCounter.reset();
+
+                return getSolucoes(solver);
+            default:
+                return new HashSet<>();
+        }
+    }
+
+    private Set<Optional<Assignment<Variable, List<String>>>> getSolucoes(CspSolver<Variable, List<String>> solver) {
+        Optional<Assignment<Variable, List<String>>> solution;
+        Set<Optional<Assignment<Variable, List<String>>>> set = new HashSet<>();
+        for (Variable var : variaveis) {
+            for (List<String> val : valores) {
+                CSP<Variable, List<String>> csp = new AlocCSP(getMaterias(), getProfessores(), getRestricoes(), new ValorAtribuido<>(var, val));
+                solution = solver.solve(csp);
+                set.add(solution);
+            }
+        }
+        return set;
+    }
+
+    private List <String> getRestricoes(){
+        List<String> restricoes = new ArrayList<>();
+        if (CBHorarioDiferente.isSelected()){
+            restricoes.add("HorarioDiferente");
+        }
+        if (CBPreferenciaDisciplina.isSelected()){
+            restricoes.add("ProfessorDiferente");
+        }
+        if (CBPreferenciaDisciplina.isSelected()){
+            restricoes.add("PreferenciaDisciplina");
+        }
+        if (CBHorarioFixo.isSelected()){
+            restricoes.add("HorarioFixo");
+        }
+        return restricoes;
+        //("HorarioDiferente", "ProfessorDiferente", "PreferenciaDisciplina", "HorarioFixo")
+    }
+
+
+    private void AlgoritmoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlgoritmoComboBoxActionPerformed
+
+    }//GEN-LAST:event_AlgoritmoComboBoxActionPerformed
+
+    private void CBHorarioDiferenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBHorarioDiferenteActionPerformed
+
+    }//GEN-LAST:event_CBHorarioDiferenteActionPerformed
+
+    private void CBPreferenciaDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBPreferenciaDisciplinaActionPerformed
+
+    }//GEN-LAST:event_CBPreferenciaDisciplinaActionPerformed
+
+    private void CBHorarioFixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBHorarioFixoActionPerformed
+
+    }//GEN-LAST:event_CBHorarioFixoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -681,24 +733,27 @@ public class TelaIA extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddPreferenciaMat;
     private javax.swing.JButton AddProfessor;
-    private javax.swing.JButton AddRestricao;
+    private javax.swing.JComboBox<String> AlgoritmoComboBox;
     private javax.swing.JButton AlocHorario;
     private javax.swing.JButton ButtonAddMateria;
+    private javax.swing.JCheckBox CBHorarioDiferente;
+    private javax.swing.JCheckBox CBHorarioFixo;
+    private javax.swing.JCheckBox CBPreferenciaDisciplina;
+    private javax.swing.JCheckBox CBProfessorDiferente;
     private javax.swing.JList<String> HorariosFixosList;
-    private javax.swing.JComboBox<String> RestricaoBox;
     private javax.swing.JTable TableAddMateria;
     private javax.swing.JTable TableProfMat;
-    private javax.swing.JTable TableRestricao;
     private javax.swing.JTextField TextAddMateria;
     private javax.swing.JTextField TextAddMateriaCred;
     private javax.swing.JTextField TextAddProfessor;
     private javax.swing.JTextField TextPrefMat;
     private javax.swing.JTextField TextPrefMat1;
-    private javax.swing.JTextField TextResticao;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -709,7 +764,6 @@ public class TelaIA extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable2;
