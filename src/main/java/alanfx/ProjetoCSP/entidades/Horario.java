@@ -1,4 +1,4 @@
-package alanfx.ProjetoCSP.csp.entidades;
+package alanfx.ProjetoCSP.entidades;
 
 import java.util.ArrayList;
 import java.util.List;

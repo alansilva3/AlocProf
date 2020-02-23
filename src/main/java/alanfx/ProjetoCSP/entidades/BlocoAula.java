@@ -1,4 +1,4 @@
-package alanfx.ProjetoCSP.csp.entidades;
+package alanfx.ProjetoCSP.entidades;
 
 public class BlocoAula implements Cloneable {
 

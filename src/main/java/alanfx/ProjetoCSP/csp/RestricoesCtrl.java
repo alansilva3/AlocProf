@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import aima.core.search.csp.Variable;
-import alanfx.ProjetoCSP.csp.entidades.Disciplina;
+import alanfx.ProjetoCSP.entidades.Disciplina;
 import alanfx.ProjetoCSP.restricoes.HorarioDiferente;
 import alanfx.ProjetoCSP.restricoes.HorarioFixo;
 import alanfx.ProjetoCSP.restricoes.PreferenciaDisciplina;

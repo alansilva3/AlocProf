@@ -20,12 +20,12 @@ import aima.core.search.csp.FlexibleBacktrackingSolver;
 import aima.core.search.csp.MinConflictsSolver;
 import aima.core.search.csp.Variable;
 import alanfx.ProjetoCSP.csp.AlocCSP;
+import alanfx.ProjetoCSP.entidades.Disciplina;
+import alanfx.ProjetoCSP.entidades.Professor;
 
 import java.util.*;
 import java.lang.*;
 
-import alanfx.ProjetoCSP.csp.entidades.Disciplina;
-import alanfx.ProjetoCSP.csp.entidades.Professor;
 import alanfx.ProjetoCSP.restricoes.util.ValorAtribuido;
 
 //import java.lang.Reflect.Array;

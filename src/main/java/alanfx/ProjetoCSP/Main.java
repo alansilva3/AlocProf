@@ -17,13 +17,14 @@ import aima.core.search.csp.FlexibleBacktrackingSolver;
 import aima.core.search.csp.MinConflictsSolver;
 import aima.core.search.csp.Variable;
 import alanfx.ProjetoCSP.csp.AlocCSP;
-import alanfx.ProjetoCSP.csp.GerenciadorDeResultados;
-import alanfx.ProjetoCSP.csp.entidades.BlocoAula;
-import alanfx.ProjetoCSP.csp.entidades.Disciplina;
-import alanfx.ProjetoCSP.csp.entidades.Horario;
-import alanfx.ProjetoCSP.csp.entidades.Professor;
+import alanfx.ProjetoCSP.entidades.BlocoAula;
+import alanfx.ProjetoCSP.entidades.Disciplina;
+import alanfx.ProjetoCSP.entidades.Horario;
+import alanfx.ProjetoCSP.entidades.Professor;
 import alanfx.ProjetoCSP.persistencia.Persistencia;
 import alanfx.ProjetoCSP.restricoes.util.ValorAtribuido;
+import alanfx.ProjetoCSP.utils.GerenciadorDeResultados;
+import alanfx.ProjetoCSP.utils.Timer;
 
 public class Main {
 	
@@ -75,11 +76,11 @@ public class Main {
 		
 		String algorit = "MinConflictsSolver"; //Exemplo algoritmo selecionado
 
-//		List<Disciplina> list = new Persistencia().getDisciplinasFromJson();
-//		if (!list.isEmpty())
-//		for (Disciplina dis : list){
-//			System.out.println(dis.getNome());
-//		}
+		List<Disciplina> list = new Persistencia().getDisciplinasFromJson();
+		if (!list.isEmpty())
+		for (Disciplina dis : list){
+			System.out.println(dis.getNome());
+		}
 
 		variaveis = AlocCSP.criarVariaveis(disciplinas);
 		valores = AlocCSP.createValues(AlocCSP.criarProfessores(professores), AlocCSP.aulas);

@@ -1,10 +1,10 @@
 package alanfx.ProjetoCSP.persistencia;
 
-import alanfx.ProjetoCSP.csp.entidades.Disciplina;
-import alanfx.ProjetoCSP.csp.entidades.Professor;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import alanfx.ProjetoCSP.entidades.Disciplina;
+import alanfx.ProjetoCSP.entidades.Professor;
 
 import java.lang.reflect.Type;
 import java.io.FileReader;
