@@ -67,11 +67,11 @@ public class Main {
 		// Fim - Dados adicionados para teste ===================================
 		
 		
-//		List<Disciplina> list = new Persistencia().getDisciplinasFromJson();
-//		if (!list.isEmpty())
-//		for (Disciplina dis : list){
-//			System.out.println(dis.getNome());
-//		}
+		List<Disciplina> list = new Persistencia().getDisciplinasFromJson();
+		if (!list.isEmpty())
+		for (Disciplina dis : list){
+			System.out.println(dis.getNome());
+		}
 
 		//Execucao principal ==============================
 			CspListener.StepCounter<Variable, List<String>> stepCounter = new CspListener.StepCounter<>();
@@ -120,7 +120,7 @@ public class Main {
 		    		if(bloco.getDisciplina().getProfessor() != null) {
 		    			System.out.print(bloco + " | ");
 		    		}else {
-		    			System.out.print(bloco.getNome()+"-NDefinido | ");
+		    			System.out.print(bloco.getDisciplina()+"- NaoDef | ");
 		    		}
 		    	}
 		    	if(cont == 15) {
