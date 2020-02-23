@@ -44,19 +44,19 @@ public class Main {
 			Disciplina fisica = new Disciplina("Fisica", 4);
 			Disciplina calculo = new Disciplina("Calculo", 6);
 			Disciplina biologia = new Disciplina("Biologia", 4);
-			fisica.setHorariosFixos(Arrays.asList("SEG17", "SEG19"));
+			Disciplina algebra = new Disciplina("Algebra", 4);
+//			fisica.setHorariosFixos(Arrays.asList("SEG17", "SEG19"));
 			Professor leonardo = new Professor("Leonardo");
-			Professor estombelo = new Professor("Estombelo");
-			Professor maria = new Professor("Maria");
-			Professor ana = new Professor("Ana");
-			estombelo.addPreferencia(calculo);
+			Professor ricardo = new Professor("Ricardo");
+			Professor vanessa = new Professor("Vanessa");
+			ricardo.addPreferencia(calculo);
 			disciplinas.add(fisica);
 			disciplinas.add(calculo);
 			disciplinas.add(biologia);
+			disciplinas.add(algebra);
 			professores.add(leonardo);
-			professores.add(estombelo);
-			professores.add(maria);
-			professores.add(ana);
+			professores.add(ricardo);
+			professores.add(vanessa);
 			//Exemplo algoritmo selecionado
 			String algorit = "MinConflictsSolver"; 
 			//Exemplo de instanciacao da lista de restricoes
@@ -67,11 +67,11 @@ public class Main {
 		// Fim - Dados adicionados para teste ===================================
 		
 		
-		List<Disciplina> list = new Persistencia().getDisciplinasFromJson();
-		if (!list.isEmpty())
-		for (Disciplina dis : list){
-			System.out.println(dis.getNome());
-		}
+//		List<Disciplina> list = new Persistencia().getDisciplinasFromJson();
+//		if (!list.isEmpty())
+//		for (Disciplina dis : list){
+//			System.out.println(dis.getNome());
+//		}
 
 		//Execucao principal ==============================
 			CspListener.StepCounter<Variable, List<String>> stepCounter = new CspListener.StepCounter<>();
@@ -84,7 +84,7 @@ public class Main {
 			
 			System.out.println("Tempo decorrido = "+ timer);
 			long numResultados = solucoesList.size();
-			System.out.println("Quantidade de resultados = "+ numResultados);
+			System.out.println("Solucoes obtidas = "+ numResultados);
 			System.out.println(stepCounter.getResults() + "\n");
 		//Fim da Execucao principal =========================
 		
@@ -102,14 +102,32 @@ public class Main {
 		int cont;
 		for(Horario horario : horarios) {
 			cont = 0;
+			System.out.println("\t\tSEG \t\t  TER \t\t    QUA \t\tQUI \t\t  SEX");
 			for(BlocoAula bloco : horario.getBlocosOrdenados()) {
 		    	cont++;
-		    	System.out.print(bloco + "  ");
-		    	if(cont == 5 || cont == 10 || cont == 15) {
-	    			System.out.println();
-	    		}
+		    	if(cont == 1) {
+		    		System.out.print("17h-19h | ");
+		    	}else if(cont == 6) {
+		    		System.out.println();
+		    		System.out.print("19h-21h | ");
+		    	}else if(cont == 11) {
+		    		System.out.println();
+		    		System.out.print("21h-23h | ");
+		    	}
+		    	if(bloco.toString().equals("-")) {
+		    		System.out.print("       --       | ");
+		    	}else {
+		    		if(bloco.getDisciplina().getProfessor() != null) {
+		    			System.out.print(bloco + " | ");
+		    		}else {
+		    			System.out.print(bloco.getNome()+"-NDefinido | ");
+		    		}
+		    	}
+		    	if(cont == 15) {
+		    		System.out.println();
+		    	}
 			}
-			System.out.println("-------------------//-------------------");
+			System.out.println("\n-------------------//-------------------");
 		}
 	}
 }

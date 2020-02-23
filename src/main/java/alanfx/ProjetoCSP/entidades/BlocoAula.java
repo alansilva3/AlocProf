@@ -31,7 +31,7 @@ public class BlocoAula implements Cloneable {
 		if(disciplina != null) {
 			return disciplina + "-" +disciplina.getProfessor();
 		}else {
-			return "     ||     ";
+			return "-";
 		}
 	}
 	
