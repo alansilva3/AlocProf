@@ -40,70 +40,66 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		Disciplina fisica = new Disciplina("Fisica", 4);
-		Disciplina calculo = new Disciplina("Calculo", 6);
-		Disciplina biologia = new Disciplina("Biologia", 4);
+		//Adicionando dados para teste ===================================
+			Disciplina fisica = new Disciplina("Fisica", 4);
+			Disciplina calculo = new Disciplina("Calculo", 6);
+			Disciplina biologia = new Disciplina("Biologia", 4);
+			fisica.setHorariosFixos(Arrays.asList("SEG17", "SEG19"));
+			Professor leonardo = new Professor("Leonardo");
+			Professor estombelo = new Professor("Estombelo");
+			Professor maria = new Professor("Maria");
+			Professor ana = new Professor("Ana");
+			estombelo.addPreferencia(calculo);
+			disciplinas.add(fisica);
+			disciplinas.add(calculo);
+			disciplinas.add(biologia);
+			professores.add(leonardo);
+			professores.add(estombelo);
+			professores.add(maria);
+			professores.add(ana);
+			//Exemplo algoritmo selecionado
+			String algorit = "MinConflictsSolver"; 
+			//Exemplo de instanciacao da lista de restricoes
+			restricoesList = new ArrayList<>(
+					Arrays.asList("HorarioDiferente", "ProfessorDiferente", "PreferenciaDisciplina", "HorarioFixo"));
+			variaveis = AlocCSP.criarVariaveis(disciplinas);
+			valores = AlocCSP.createValues(AlocCSP.criarProfessores(professores), AlocCSP.aulas);
+		// Fim - Dados adicionados para teste ===================================
 		
-		fisica.setHorariosFixos(Arrays.asList("SEG17", "SEG19"));
 		
-		Professor leonardo = new Professor("Leonardo");
-		Professor estombelo = new Professor("Estombelo");
-		Professor maria = new Professor("Maria");
-		Professor ana = new Professor("Ana");
-		
-		estombelo.addPreferencia(calculo);
-		
-		disciplinas.add(fisica);
-		disciplinas.add(calculo);
-		disciplinas.add(biologia);
-		
-		professores.add(leonardo);
-		professores.add(estombelo);
-		professores.add(maria);
-		professores.add(ana);
-		
-		String algorit = "MinConflictsSolver"; //Exemplo algoritmo selecionado
-		
-		//Exemplo de instanciacao da lista de restricoes
-		restricoesList = new ArrayList<>(
-				Arrays.asList("HorarioDiferente", "ProfessorDiferente", "PreferenciaDisciplina", "HorarioFixo"));
-
 		List<Disciplina> list = new Persistencia().getDisciplinasFromJson();
 		if (!list.isEmpty())
 		for (Disciplina dis : list){
 			System.out.println(dis.getNome());
 		}
 
-		variaveis = AlocCSP.criarVariaveis(disciplinas);
-		valores = AlocCSP.createValues(AlocCSP.criarProfessores(professores), AlocCSP.aulas);
-		
 		//Execucao principal ==============================
-		CspListener.StepCounter<Variable, List<String>> stepCounter = new CspListener.StepCounter<>();
-		AlgoritmoCtrl algoritmoCtrl = new AlgoritmoCtrl(disciplinas, professores, restricoesList, variaveis, valores);
+			CspListener.StepCounter<Variable, List<String>> stepCounter = new CspListener.StepCounter<>();
+			AlgoritmoCtrl algoritmoCtrl = new AlgoritmoCtrl(disciplinas, professores, restricoesList, variaveis, valores);
+			
+			System.out.println("Alocar Professores ("+algorit+")");
+			Timer timer = new Timer();
+			Set<Optional<Assignment<Variable, List<String>>>> solucoesList =
+					algoritmoCtrl.usarAlgoritmo(algorit, stepCounter);
+			
+			System.out.println("Tempo decorrido = "+ timer);
+			long numResultados = solucoesList.size();
+			System.out.println("Quantidade de resultados = "+ numResultados);
+			System.out.println(stepCounter.getResults() + "\n");
+		//Fim da Execucao principal =========================
 		
-		System.out.println("Alocar Professores ("+algorit+")");
-		Timer timer = new Timer();
-		Set<Optional<Assignment<Variable, List<String>>>> solucoesList =
-				algoritmoCtrl.usarAlgoritmo(algorit, stepCounter);
-		
-		System.out.println("Tempo decorrido = "+ timer);
-		long numResultados = solucoesList.size();
-		System.out.println("Numero de resultados = "+ numResultados);
-		System.out.println(stepCounter.getResults() + "\n");
-		
-		
+			
 		/*
 		 * Transformar a lista de resultados em uma lista de objetos do tipo "Horario"
-		 * contendo os blocos de aula com disciplinas e professores
+		 * contendo os blocos de aula com disciplinas e professores.
+		 * Essa lista de horarios sera usada para gerar os resultados na interface.
 		 */
 		GerenciadorDeResultados gerenciador = new GerenciadorDeResultados(disciplinas, professores, solucoesList);
-		
-		//Usar essa lista pra gerar os resultados na interface
 		List<Horario> horarios = gerenciador.gerarHorarios();
 		
 		
 		//ESSA PARTE SERÁ DESCARTADA DEPOIS DE CRIAR A INTERFACE GRAFICA
-		int cont = 0;
+		int cont;
 		for(Horario horario : horarios) {
 			cont = 0;
 			for(BlocoAula bloco : horario.getBlocosOrdenados()) {
