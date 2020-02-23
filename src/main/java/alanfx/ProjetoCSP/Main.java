@@ -21,17 +21,6 @@ import alanfx.ProjetoCSP.utils.Timer;
 
 public class Main {
 	
-//	//Lista de algoritmos que poderao ser selecionados pelo usuario (apenas um sera selecionado por vez)
-//	private static final List<String> algoritmos = new ArrayList<>(
-//		Arrays.asList("MinConflictsSolver",
-//					  "Backtracking + MRV & DEG + LCV + AC3",
-//					  "Backtracking + MRV & DEG",
-//					  "Backtracking"));
-//	
-//	//Lista de restricoes que poderao ser selecionadas pelo usuario
-//	private static final List<String> restricoesPossiveis = new ArrayList<>( 
-//		Arrays.asList("HorarioDiferente", "ProfessorDiferente", "PreferenciaDisciplina", "HorarioFixo"));
-	
 	private static List<Disciplina> disciplinas = new ArrayList<>();
 	private static List<Professor> professores = new ArrayList<>();
 	private static List<String> restricoesList;
@@ -61,17 +50,17 @@ public class Main {
 			String algorit = "MinConflictsSolver"; 
 			//Exemplo de instanciacao da lista de restricoes
 			restricoesList = new ArrayList<>(
-					Arrays.asList("HorarioDiferente", "ProfessorDiferente", "PreferenciaDisciplina", "HorarioFixo"));
+					Arrays.asList());
 			variaveis = AlocCSP.criarVariaveis(disciplinas);
 			valores = AlocCSP.createValues(AlocCSP.criarProfessores(professores), AlocCSP.aulas);
 		// Fim - Dados adicionados para teste ===================================
 		
 		
-		List<Disciplina> list = new Persistencia().getDisciplinasFromJson();
-		if (!list.isEmpty())
-		for (Disciplina dis : list){
-			System.out.println(dis.getNome());
-		}
+//		List<Disciplina> list = new Persistencia().getDisciplinasFromJson();
+//		if (!list.isEmpty())
+//		for (Disciplina dis : list){
+//			System.out.println(dis.getNome());
+//		}
 
 		//Execucao principal ==============================
 			CspListener.StepCounter<Variable, List<String>> stepCounter = new CspListener.StepCounter<>();
@@ -81,9 +70,10 @@ public class Main {
 			Timer timer = new Timer();
 			Set<Optional<Assignment<Variable, List<String>>>> solucoesList =
 					algoritmoCtrl.usarAlgoritmo(algorit, stepCounter);
+			String tempo = timer.toString();
 			
-			System.out.println("Tempo decorrido = "+ timer);
 			long numResultados = solucoesList.size();
+			System.out.println("Tempo decorrido = "+ tempo);
 			System.out.println("Solucoes obtidas = "+ numResultados);
 			System.out.println(stepCounter.getResults() + "\n");
 		//Fim da Execucao principal =========================
@@ -98,7 +88,7 @@ public class Main {
 		List<Horario> horarios = gerenciador.gerarHorarios();
 		
 		
-		//ESSA PARTE SERÁ DESCARTADA DEPOIS DE CRIAR A INTERFACE GRAFICA
+		//ESSA PARTE SERA DESCARTADA DEPOIS DE CRIAR A INTERFACE GRAFICA
 		int cont;
 		for(Horario horario : horarios) {
 			cont = 0;
@@ -129,5 +119,8 @@ public class Main {
 			}
 			System.out.println("\n-------------------//-------------------");
 		}
+		System.out.println("Tempo decorrido = "+ tempo);
+		System.out.println("Solucoes obtidas = "+ numResultados);
+		System.out.println(stepCounter.getResults() + "\n");
 	}
 }

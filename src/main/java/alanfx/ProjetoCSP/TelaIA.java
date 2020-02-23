@@ -11,13 +11,13 @@
 
 package alanfx.ProjetoCSP;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 import aima.core.search.csp.Assignment;
-import aima.core.search.csp.CSP;
-import aima.core.search.csp.CspHeuristics;
 import aima.core.search.csp.CspListener;
-import aima.core.search.csp.CspSolver;
-import aima.core.search.csp.FlexibleBacktrackingSolver;
-import aima.core.search.csp.MinConflictsSolver;
 import aima.core.search.csp.Variable;
 import alanfx.ProjetoCSP.csp.AlgoritmoCtrl;
 import alanfx.ProjetoCSP.csp.AlocCSP;
@@ -25,11 +25,6 @@ import alanfx.ProjetoCSP.entidades.BlocoAula;
 import alanfx.ProjetoCSP.entidades.Disciplina;
 import alanfx.ProjetoCSP.entidades.Horario;
 import alanfx.ProjetoCSP.entidades.Professor;
-
-import java.util.*;
-import java.lang.*;
-
-import alanfx.ProjetoCSP.restricoes.util.ValorAtribuido;
 import alanfx.ProjetoCSP.utils.GerenciadorDeResultados;
 
 //import java.lang.Reflect.Array;
@@ -37,7 +32,8 @@ import alanfx.ProjetoCSP.utils.GerenciadorDeResultados;
 
 public class TelaIA extends javax.swing.JFrame {
 
-    int pageHorario = 0;
+	private static final long serialVersionUID = 1L;
+	int pageHorario = 0;
     List<Horario> horarios;
 
     /**
@@ -108,7 +104,8 @@ public class TelaIA extends javax.swing.JFrame {
                 "Segunda", "Terça", "Quarta", "Quinta", "Sexta"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
+			private static final long serialVersionUID = 1L;
+			boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
 
@@ -155,7 +152,8 @@ public class TelaIA extends javax.swing.JFrame {
                 "Professores", "Materia 1", "Materia 2", "Materia 3", "Materia 4", "Materia 5"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
+			private static final long serialVersionUID = 1L;
+			boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
             };
 
@@ -195,7 +193,8 @@ public class TelaIA extends javax.swing.JFrame {
                 "Materias Adicionadas", "Creditos", "HorárioFixo"
             }
         ) {
-            Class[] types = new Class [] {
+			private static final long serialVersionUID = 1L;
+			Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
@@ -283,7 +282,8 @@ public class TelaIA extends javax.swing.JFrame {
         jLabel9.setText("Horarios Fixos");
 
         HorariosFixosList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "N/A", "SEG17", "SEG19", "SEG21", "TER17", "TER19", "TER21", "QUA17", "QUA19", "QUA21", "QUI17", "QUI19", "QUI21", "SEX17", "SEX19", "SEX21", " " };
+			private static final long serialVersionUID = 1L;
+			String[] strings = { "N/A", "SEG17", "SEG19", "SEG21", "TER17", "TER19", "TER21", "QUA17", "QUA19", "QUA21", "QUI17", "QUI19", "QUI21", "SEX17", "SEX19", "SEX21", " " };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -588,7 +588,6 @@ public class TelaIA extends javax.swing.JFrame {
             }         
         }
 
-
     }//GEN-LAST:event_AddPreferenciaMatActionPerformed
 
     private void TextAddProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextAddProfessorActionPerformed
@@ -651,52 +650,6 @@ public class TelaIA extends javax.swing.JFrame {
         imprimirResultado();
     }
 
-    private Set<Optional<Assignment<Variable, List<String>>>> usarAlgoritmo(String algorit,
-                                                                                   CspListener.StepCounter<Variable, List<String>> stepCounter) {
-        CspSolver<Variable, List<String>> solver;
-        switch(algorit) {
-            case "MinConflictsSolver":
-                solver = new MinConflictsSolver<>(1000);
-                solver.addCspListener(stepCounter);
-                stepCounter.reset();
-
-                return getSolucoes(solver);
-            case "Backtracking + MRV & DEG + LCV + AC3":
-                solver = new FlexibleBacktrackingSolver<Variable, List<String>>().setAll();
-                solver.addCspListener(stepCounter);
-                stepCounter.reset();
-
-                return getSolucoes(solver);
-            case "Backtracking + MRV & DEG":
-                solver = new FlexibleBacktrackingSolver<Variable, List<String>>().set(CspHeuristics.mrvDeg());
-                solver.addCspListener(stepCounter);
-                stepCounter.reset();
-
-                return getSolucoes(solver);
-            case "Backtracking":
-                solver = new FlexibleBacktrackingSolver<>();
-                solver.addCspListener(stepCounter);
-                stepCounter.reset();
-
-                return getSolucoes(solver);
-            default:
-                return new HashSet<>();
-        }
-    }
-
-    private Set<Optional<Assignment<Variable, List<String>>>> getSolucoes(CspSolver<Variable, List<String>> solver) {
-        Optional<Assignment<Variable, List<String>>> solution;
-        Set<Optional<Assignment<Variable, List<String>>>> set = new HashSet<>();
-        for (Variable var : variaveis) {
-            for (List<String> val : valores) {
-                CSP<Variable, List<String>> csp = new AlocCSP(getMaterias(), getProfessores(), getRestricoes(), new ValorAtribuido<>(var, val));
-                solution = solver.solve(csp);
-                set.add(solution);
-            }
-        }
-        return set;
-    }
-
     private List <String> getRestricoes(){
         List<String> restricoes = new ArrayList<>();
         if (CBHorarioDiferente.isSelected()){
@@ -714,7 +667,6 @@ public class TelaIA extends javax.swing.JFrame {
         return restricoes;
         //("HorarioDiferente", "ProfessorDiferente", "PreferenciaDisciplina", "HorarioFixo")
     }
-
 
     private void AlgoritmoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlgoritmoComboBoxActionPerformed
 
