@@ -289,9 +289,17 @@ public class TelaIA extends javax.swing.JFrame {
         jLabel8.setText("Creditos");
 
         jButton1.setText("<<");
-
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                voltarPagina();
+            }
+        });
         jButton2.setText(">>");
-
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passarPagina();
+            }
+        });
         jLabel9.setText("Horarios Fixos");
 
         HorariosFixosList.setModel(new javax.swing.AbstractListModel<String>() {
@@ -608,7 +616,8 @@ public class TelaIA extends javax.swing.JFrame {
         //List <Integer> creditos = new ArrayList<Integer>();
         //List <Disciplina> disciplinas = new ArrayList<>();
         //Disciplina discip = null;
-        for(int i = 0; i < TableAddMateria.getColumnCount(); i++){
+        for(int i = 0; i < TableAddMateria.getRowCount(); i++){
+            if(TableAddMateria.getValueAt(i,0) != null)
             materias.add(new Disciplina(
                     TableAddMateria.getValueAt(i,0).toString(),
                     Integer.parseInt(TableAddMateria.getValueAt(i,1).toString())
@@ -720,6 +729,7 @@ public class TelaIA extends javax.swing.JFrame {
                 algoritmoCtrl.usarAlgoritmo(algorit, stepCounter);
         GerenciadorDeResultados gerenciador = new GerenciadorDeResultados(disciplinas, professores, solucoesList);
         horarios = gerenciador.gerarHorarios();
+        pageHorario = 0;
         new Persistencia().salvarHorarios(horarios);
         imprimirResultado();
 
@@ -747,7 +757,8 @@ public class TelaIA extends javax.swing.JFrame {
     }
 
     private void voltarPagina() {
-        pageHorario--;
+        if(pageHorario>0)
+            pageHorario--;
         imprimirResultado();
     }
 
