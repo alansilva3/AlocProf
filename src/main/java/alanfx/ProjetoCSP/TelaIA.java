@@ -25,6 +25,7 @@ import alanfx.ProjetoCSP.entidades.BlocoAula;
 import alanfx.ProjetoCSP.entidades.Disciplina;
 import alanfx.ProjetoCSP.entidades.Horario;
 import alanfx.ProjetoCSP.entidades.Professor;
+import alanfx.ProjetoCSP.persistencia.Persistencia;
 import alanfx.ProjetoCSP.utils.GerenciadorDeResultados;
 
 //import java.lang.Reflect.Array;
@@ -35,12 +36,19 @@ public class TelaIA extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
 	int pageHorario = 0;
     List<Horario> horarios;
+    Persistencia persistencia = new Persistencia();
 
     /**
      * Creates new form TelaIA
      */
     public TelaIA() {
         initComponents();
+        List<Horario> dados = persistencia.getHorariosFromJson();
+        if (!dados.isEmpty()) {
+            horarios = dados;
+            pageHorario = 0;
+            imprimirResultado();
+        }
     }
 
     /**
@@ -620,6 +628,7 @@ public class TelaIA extends javax.swing.JFrame {
                 algoritmoCtrl.usarAlgoritmo(algorit, stepCounter);
         GerenciadorDeResultados gerenciador = new GerenciadorDeResultados(disciplinas, professores, solucoesList);
         horarios = gerenciador.gerarHorarios();
+        new Persistencia().salvarHorarios(horarios);
         imprimirResultado();
 
     }//GEN-LAST:event_AlocHorarioActionPerformed

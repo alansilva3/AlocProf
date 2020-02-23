@@ -1,5 +1,6 @@
 package alanfx.ProjetoCSP.persistencia;
 
+import alanfx.ProjetoCSP.entidades.Horario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -26,6 +27,22 @@ public class Persistencia {
         catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+    public List<Horario> getHorariosFromJson() {
+        List<Horario> list = new ArrayList<>();
+        try {
+            //Salva no objeto JSONObject o que o parse tratou do arquivo
+            Type horariosListType = new TypeToken<ArrayList<Horario>>(){}.getType();
+            list = gson.fromJson(new FileReader(
+                    "horarios.json"), horariosListType);
+        }
+        //Trata as exceptions que podem ser lançadas no decorrer do processo
+        catch (Exception e) {
+            e.printStackTrace();
+            return list;
+        }
+        return list;
     }
 
     public List<Disciplina> getDisciplinasFromJson() {
@@ -68,6 +85,11 @@ public class Persistencia {
     public void salvarProfessores(List<Professor> professores) {
         String json = gson.toJson(professores);
         salvar("professores", json);
+    }
+
+    public void salvarHorarios(List<Horario> horarios) {
+        String json = gson.toJson(horarios);
+        salvar("horarios", json);
     }
 
 }
