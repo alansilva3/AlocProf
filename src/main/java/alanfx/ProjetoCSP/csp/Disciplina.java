@@ -68,7 +68,6 @@ public class Disciplina implements Cloneable {
 		this.professor = professor;
 	}
 
-	// -----
 	public List<String> getHorariosAlocados() {
 		return horariosAlocados;
 	}
@@ -80,7 +79,6 @@ public class Disciplina implements Cloneable {
 	public boolean contem(Variable var) {
 		return vars.contains(var);
 	}
-	// ----
 
 	@Override
 	public String toString() {

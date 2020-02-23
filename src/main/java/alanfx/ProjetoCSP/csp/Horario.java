@@ -6,7 +6,6 @@ import java.util.List;
 public class Horario {
 
 	private List<BlocoAula> blocos;
-	
 
 	public Horario(List<BlocoAula> blocos) {
 		this.blocos = blocos;

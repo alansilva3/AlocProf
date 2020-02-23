@@ -38,7 +38,6 @@ public class Main {
 					  "Backtracking + MRV & DEG",
 					  "Backtracking"));
 	
-	
 	//Lista de restricoes que poderao ser selecionadas pelo usuario
 	private static final List<String> restricoesPossiveis = new ArrayList<>( 
 		Arrays.asList("HorarioDiferente", "ProfessorDiferente", "PreferenciaDisciplina", "HorarioFixo"));
@@ -76,34 +75,41 @@ public class Main {
 		
 		String algorit = "MinConflictsSolver"; //Exemplo algoritmo selecionado
 
-		List<Disciplina> list = new Persistencia().getDisciplinasFromJson();
-		if (!list.isEmpty())
-		for (Disciplina dis : list){
-			System.out.println(dis.getNome());
-		}
+//		List<Disciplina> list = new Persistencia().getDisciplinasFromJson();
+//		if (!list.isEmpty())
+//		for (Disciplina dis : list){
+//			System.out.println(dis.getNome());
+//		}
 
 		variaveis = AlocCSP.criarVariaveis(disciplinas);
 		valores = AlocCSP.createValues(AlocCSP.criarProfessores(professores), AlocCSP.aulas);
+		
+		//Execucao principal
+		System.out.println("Alocar Professores ("+algorit+")");
+		Timer timer = new Timer();
+		
 		CspListener.StepCounter<Variable, List<String>> stepCounter = new CspListener.StepCounter<>();
 		Set<Optional<Assignment<Variable, List<String>>>> solucoesList =
 				usarAlgoritmo(algorit, stepCounter);
 		
-		
-		
-		//----------------------
-		/*
-		 * Transformar a lista de resultados em uma lista de objetos do tipo "Horario"
-		 * contendo os blocos de aula com disciplinas e professores
-		 */
-		GerenciadorDeResultados gerenciador = new GerenciadorDeResultados(disciplinas, professores, solucoesList);
-		
-		//Usar essa lista pra gerar os resultados na interface
-		List<Horario> horarios = gerenciador.gerarHorarios();
+		System.out.println("Tempo decorrido = "+ timer);
+		long numResultados = solucoesList.size();
+		System.out.println("Numero de resultados = "+ numResultados);
+		System.out.println(stepCounter.getResults() + "\n");
 		
 		//----------------------
+			/*
+			 * Transformar a lista de resultados em uma lista de objetos do tipo "Horario"
+			 * contendo os blocos de aula com disciplinas e professores
+			 */
+			GerenciadorDeResultados gerenciador = new GerenciadorDeResultados(disciplinas, professores, solucoesList);
+			
+			//Usar essa lista pra gerar os resultados na interface
+			List<Horario> horarios = gerenciador.gerarHorarios();
+		//----------------------
 		
 		
-		//ESSA PARTE SERÁ DESCARTADA DEPOIS DE CRIAR A INTERFACE GRÁFICA
+		//ESSA PARTE SERÁ DESCARTADA DEPOIS DE CRIAR A INTERFACE GRAFICA
 		int cont = 0;
 		for(Horario horario : horarios) {
 			cont = 0;
@@ -126,25 +132,21 @@ public class Main {
 				solver = new MinConflictsSolver<>(1000);
 				solver.addCspListener(stepCounter);
 				stepCounter.reset();
-				
 				return getSolucoes(solver);
 			case "Backtracking + MRV & DEG + LCV + AC3":
 				solver = new FlexibleBacktrackingSolver<Variable, List<String>>().setAll();
 				solver.addCspListener(stepCounter);
 				stepCounter.reset();
-				
 				return getSolucoes(solver);
 			case "Backtracking + MRV & DEG":
 				solver = new FlexibleBacktrackingSolver<Variable, List<String>>().set(CspHeuristics.mrvDeg());
 				solver.addCspListener(stepCounter);
 				stepCounter.reset();
-				
 				return getSolucoes(solver);
 			case "Backtracking":
 				solver = new FlexibleBacktrackingSolver<>();
 				solver.addCspListener(stepCounter);
 				stepCounter.reset();
-				
 				return getSolucoes(solver);
 			default:
 				return new HashSet<>();
