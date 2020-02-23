@@ -17,11 +17,11 @@ import aima.core.search.csp.FlexibleBacktrackingSolver;
 import aima.core.search.csp.MinConflictsSolver;
 import aima.core.search.csp.Variable;
 import alanfx.ProjetoCSP.csp.AlocCSP;
-import alanfx.ProjetoCSP.csp.BlocoAula;
-import alanfx.ProjetoCSP.csp.Disciplina;
 import alanfx.ProjetoCSP.csp.GerenciadorDeResultados;
-import alanfx.ProjetoCSP.csp.Horario;
-import alanfx.ProjetoCSP.csp.Professor;
+import alanfx.ProjetoCSP.csp.entidades.BlocoAula;
+import alanfx.ProjetoCSP.csp.entidades.Disciplina;
+import alanfx.ProjetoCSP.csp.entidades.Horario;
+import alanfx.ProjetoCSP.csp.entidades.Professor;
 import alanfx.ProjetoCSP.persistencia.Persistencia;
 import alanfx.ProjetoCSP.restricoes.util.ValorAtribuido;
 

@@ -23,8 +23,9 @@ import alanfx.ProjetoCSP.csp.AlocCSP;
 
 import java.util.*;
 import java.lang.*;
-import alanfx.ProjetoCSP.csp.Disciplina;
-import alanfx.ProjetoCSP.csp.Professor;
+
+import alanfx.ProjetoCSP.csp.entidades.Disciplina;
+import alanfx.ProjetoCSP.csp.entidades.Professor;
 import alanfx.ProjetoCSP.restricoes.util.ValorAtribuido;
 
 //import java.lang.Reflect.Array;

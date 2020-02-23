@@ -10,6 +10,8 @@ import aima.core.search.csp.CSP;
 import aima.core.search.csp.Constraint;
 import aima.core.search.csp.Domain;
 import aima.core.search.csp.Variable;
+import alanfx.ProjetoCSP.csp.entidades.Disciplina;
+import alanfx.ProjetoCSP.csp.entidades.Professor;
 
 public class AlocCSP extends CSP<Variable, List<String>> {
 
