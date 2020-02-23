@@ -289,9 +289,17 @@ public class TelaIA extends javax.swing.JFrame {
         jLabel8.setText("Creditos");
 
         jButton1.setText("<<");
-
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                voltarPagina();
+            }
+        });
         jButton2.setText(">>");
-
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passarPagina();
+            }
+        });
         jLabel9.setText("Horarios Fixos");
 
         HorariosFixosList.setModel(new javax.swing.AbstractListModel<String>() {
@@ -358,7 +366,7 @@ public class TelaIA extends javax.swing.JFrame {
         jTable3.setCellSelectionEnabled(true);
         jTable3.setRowHeight(25);
         jTable3.setSelectionBackground(new java.awt.Color(51, 153, 255));
-        jTable3.setSelectionMode();
+        //jTable3.setSelectionMode();
         jTable3.getTableHeader().setResizingAllowed(false);
         jTable3.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTable3);
@@ -399,7 +407,7 @@ public class TelaIA extends javax.swing.JFrame {
         jTable4.setCellSelectionEnabled(true);
         jTable4.setRowHeight(25);
         jTable4.setSelectionBackground(new java.awt.Color(51, 153, 255));
-        jTable4.setSelectionMode();
+        //jTable4.setSelectionMode();
         jTable4.getTableHeader().setResizingAllowed(false);
         jTable4.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(jTable4);
@@ -746,7 +754,8 @@ public class TelaIA extends javax.swing.JFrame {
     }
 
     private void voltarPagina() {
-        pageHorario--;
+        if(pageHorario>0)
+            pageHorario--;
         imprimirResultado();
     }
 
