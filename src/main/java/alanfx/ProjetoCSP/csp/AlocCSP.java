@@ -3,11 +3,9 @@ package alanfx.ProjetoCSP.csp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import aima.core.search.csp.Assignment;
 import aima.core.search.csp.CSP;
 import aima.core.search.csp.Constraint;
 import aima.core.search.csp.Domain;
@@ -75,9 +73,9 @@ public class AlocCSP extends CSP<Variable, List<String>> {
 
 	private void addAllHorarioFixo(List<Disciplina> disciplinas) {
 		for(Disciplina disc : disciplinas) {
-			if(!disc.getHorarios().isEmpty()) {
-				for(int i = 0; i< disc.getHorarios().size();i++) {
-					addConstraint(new HorarioFixo<>(disc.getVars().get(i), disc.getHorarios().get(i)));
+			if(!disc.getHorariosFixos().isEmpty()) {
+				for(int i = 0; i< disc.getHorariosFixos().size();i++) {
+					addConstraint(new HorarioFixo<>(disc.getVars().get(i), disc.getHorariosFixos().get(i)));
 				}
 			}
 		}
@@ -147,7 +145,7 @@ public class AlocCSP extends CSP<Variable, List<String>> {
 		List<List<String>> values = new ArrayList<>();
 		for(String prof : profs) {
 			for(String aula : aulas) {
-				values.add(Arrays.asList(aula, prof));
+				values.add(Arrays.asList(aula, prof)); //LIST<AULA, PROFESSOR>
 			}
 		}
 		return values;
@@ -175,28 +173,4 @@ public class AlocCSP extends CSP<Variable, List<String>> {
 			addConstraint(new PriorizarProfessores<>(var, profs2, preferencias));
 		}
 	}
-	
-    public static void imprimir(Assignment<Variable, List<String>> solution) {
-    	LinkedHashMap<Variable, List<String>> assignment = solution.getVariableToValueMap();
-    	StringBuilder result = new StringBuilder("");
-    	int cont = 0;
-    	for( String aula : aulas) {
-    		cont++;
-    		Map.Entry<Variable, List<String>> map = null;
-    		for (Map.Entry<Variable, List<String>> entry : assignment.entrySet()) {
-    			if(aula.equals(entry.getValue().get(0))) {
-    				map = entry;
-    			}
-    		}
-    		if(map != null) {
-    			result.append(map+"\t");
-    		}else {
-    			result.append("         ||         \t");
-    		}
-    		if(cont == 5 || cont == 10 || cont == 15) {
-    			result.append("\n");
-    		}
-    	}
-    	System.out.println(result.toString());
-    }
 }

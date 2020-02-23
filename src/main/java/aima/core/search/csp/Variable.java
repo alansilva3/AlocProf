@@ -5,7 +5,7 @@ package aima.core.search.csp;
  *
  * @author Ruediger Lunde
  */
-public class Variable {
+public class Variable implements Cloneable {
     private final String name;
 
     public Variable(String name) {
@@ -30,4 +30,9 @@ public class Variable {
     public final int hashCode() {
         return name.hashCode();
     }
+    
+    @Override
+	public Variable clone() throws CloneNotSupportedException {
+		return (Variable) super.clone();
+	}
 }

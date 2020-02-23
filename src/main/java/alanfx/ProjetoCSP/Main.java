@@ -16,19 +16,20 @@ import aima.core.search.csp.CspSolver;
 import aima.core.search.csp.FlexibleBacktrackingSolver;
 import aima.core.search.csp.MinConflictsSolver;
 import aima.core.search.csp.Variable;
-import aima.core.search.framework.problem.Problem;
 import alanfx.ProjetoCSP.csp.AlocCSP;
-
+import alanfx.ProjetoCSP.csp.BlocoAula;
 import alanfx.ProjetoCSP.csp.Disciplina;
+import alanfx.ProjetoCSP.csp.GerenciadorDeResultados;
+import alanfx.ProjetoCSP.csp.Horario;
 import alanfx.ProjetoCSP.csp.Professor;
 import alanfx.ProjetoCSP.persistencia.Persistencia;
 import alanfx.ProjetoCSP.restricoes.util.ValorAtribuido;
-import com.google.gson.Gson;
 
 public class Main {
 	
 	private static List<Disciplina> disciplinas = new ArrayList<>();
 	private static List<Professor> professores = new ArrayList<>();
+	private static List<String> restricoesList;
 	
 	//Lista de algoritmos que poderao ser selecionados pelo usuario (apenas um sera selecionado por vez)
 	private static final List<String> algoritmos = new ArrayList<>(
@@ -37,7 +38,6 @@ public class Main {
 					  "Backtracking + MRV & DEG",
 					  "Backtracking"));
 	
-	private static List<String> restricoesList;
 	
 	//Lista de restricoes que poderao ser selecionadas pelo usuario
 	private static final List<String> restricoesPossiveis = new ArrayList<>( 
@@ -52,7 +52,7 @@ public class Main {
 		Disciplina calculo = new Disciplina("Calculo", 6);
 		Disciplina biologia = new Disciplina("Biologia", 4);
 		
-		fisica.setHorarios(Arrays.asList("SEG17", "SEG19"));
+		fisica.setHorariosFixos(Arrays.asList("SEG17", "SEG19"));
 		
 		Professor leonardo = new Professor("Leonardo");
 		Professor estombelo = new Professor("Estombelo");
@@ -85,19 +85,37 @@ public class Main {
 		variaveis = AlocCSP.criarVariaveis(disciplinas);
 		valores = AlocCSP.createValues(AlocCSP.criarProfessores(professores), AlocCSP.aulas);
 		CspListener.StepCounter<Variable, List<String>> stepCounter = new CspListener.StepCounter<>();
-		Set<Optional<Assignment<Variable, List<String>>>> solucoesList = //usar essa lista pra exibir os resultados na interface
+		Set<Optional<Assignment<Variable, List<String>>>> solucoesList =
 				usarAlgoritmo(algorit, stepCounter);
 		
 		
-		//==============================================================
+		
+		//----------------------
+		/*
+		 * Transformar a lista de resultados em uma lista de objetos do tipo "Horario"
+		 * contendo os blocos de aula com disciplinas e professores
+		 */
+		GerenciadorDeResultados gerenciador = new GerenciadorDeResultados(disciplinas, professores, solucoesList);
+		
+		//Usar essa lista pra gerar os resultados na interface
+		List<Horario> horarios = gerenciador.gerarHorarios();
+		
+		//----------------------
+		
+		
 		//ESSA PARTE SERÁ DESCARTADA DEPOIS DE CRIAR A INTERFACE GRÁFICA
-			System.out.println("Alocar Professores ("+algorit+")");
-			for (Optional<Assignment<Variable, List<String>>> soluc : solucoesList) {
-				soluc.ifPresent(AlocCSP::imprimir);
-				System.out.println("------------------------------");
+		int cont = 0;
+		for(Horario horario : horarios) {
+			cont = 0;
+			for(BlocoAula bloco : horario.getBlocosOrdenados()) {
+		    	cont++;
+		    	System.out.print(bloco + "  ");
+		    	if(cont == 5 || cont == 10 || cont == 15) {
+	    			System.out.println();
+	    		}
 			}
-			System.out.println(stepCounter.getResults() + "\n");
-		//==============================================================
+			System.out.println("-------------------//-------------------");
+		}
 	}
 
 	private static Set<Optional<Assignment<Variable, List<String>>>> usarAlgoritmo(String algorit,
@@ -140,7 +158,8 @@ public class Main {
 			for (List<String> val : valores) {
 				CSP<Variable, List<String>> csp = new AlocCSP(disciplinas, professores, restricoesList, new ValorAtribuido<>(var, val));
 				solution = solver.solve(csp);
-				set.add(solution);
+				if(!solution.isEmpty())
+					set.add(solution);
 			}
 		}
 		return set;

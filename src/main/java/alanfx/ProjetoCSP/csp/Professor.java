@@ -5,21 +5,32 @@ import java.util.List;
 
 import aima.core.search.csp.Variable;
 
-public class Professor {
+public class Professor implements Cloneable {
 	private String nome;
 	private List<Variable> preferencias;
+	
+	//Carga horaria do professor para o resultado atual
+	private Integer cargaHoraria;
+	private List<String> horariosAlocados;
 	
 	public Professor(String nome) {
 		this.nome = nome;
 		this.preferencias = new ArrayList<>();
+		this.cargaHoraria = 0;
+		this.horariosAlocados = new ArrayList<>();
+	}
+	
+	public List<String> getHorariosAlocados() {
+		return horariosAlocados;
+	}
+
+	public void addHorarioAlocado(String horario) {
+		incrementCargaHoraria(30); //Valor referente a cada duas aulas semanais (2cr)
+		this.horariosAlocados.add(horario);
 	}
 
 	public String getNome() {
 		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public List<Variable> getPreferencias() {
@@ -32,6 +43,38 @@ public class Professor {
 		}
 	}
 
+	public Integer getCargaHoraria() {
+		return cargaHoraria;
+	}
+
+	public void setCargaHoraria(Integer cargaHoraria) {
+		this.cargaHoraria = cargaHoraria;
+	}
+	
+	public void incrementCargaHoraria(Integer valor) {
+		this.cargaHoraria += valor;
+	}
+	
+	@Override
+	public String toString() {
+		return nome;
+	}
+
+	@Override
+	public Professor clone() {
+		Professor result;
+		try {
+			result = (Professor) super.clone();
+			result.nome = nome;
+			result.preferencias = new ArrayList<>();
+			result.cargaHoraria = 0;
+			result.horariosAlocados = new ArrayList<>();
+		} catch (CloneNotSupportedException e) {
+			throw new UnsupportedOperationException("Professor nao pode ser clonado");
+		}
+		return result;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
