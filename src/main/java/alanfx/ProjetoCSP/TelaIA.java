@@ -19,19 +19,26 @@ import aima.core.search.csp.CspSolver;
 import aima.core.search.csp.FlexibleBacktrackingSolver;
 import aima.core.search.csp.MinConflictsSolver;
 import aima.core.search.csp.Variable;
+import alanfx.ProjetoCSP.csp.AlgoritmoCtrl;
 import alanfx.ProjetoCSP.csp.AlocCSP;
+import alanfx.ProjetoCSP.entidades.BlocoAula;
 import alanfx.ProjetoCSP.entidades.Disciplina;
+import alanfx.ProjetoCSP.entidades.Horario;
 import alanfx.ProjetoCSP.entidades.Professor;
 
 import java.util.*;
 import java.lang.*;
 
 import alanfx.ProjetoCSP.restricoes.util.ValorAtribuido;
+import alanfx.ProjetoCSP.utils.GerenciadorDeResultados;
 
 //import java.lang.Reflect.Array;
 
 
 public class TelaIA extends javax.swing.JFrame {
+
+    int pageHorario = 0;
+    List<Horario> horarios;
 
     /**
      * Creates new form TelaIA
@@ -119,12 +126,12 @@ public class TelaIA extends javax.swing.JFrame {
         jTable2.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTable2);
 
-        jLabel2.setText("19:00");
+        jLabel2.setText("19:00 às 21:00");
         jLabel2.setToolTipText("");
 
-        jLabel3.setText("17:00");
+        jLabel3.setText("17:00 às 19:00");
 
-        jLabel4.setText("21:00");
+        jLabel4.setText("21:00 às 23:00");
 
         TableProfMat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -260,8 +267,18 @@ public class TelaIA extends javax.swing.JFrame {
         jLabel8.setText("Creditos");
 
         jButton1.setText("<<");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                voltarPagina();
+            }
+        });
 
         jButton2.setText(">>");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passarPagina();
+            }
+        });
 
         jLabel9.setText("Horarios Fixos");
 
@@ -351,10 +368,11 @@ public class TelaIA extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    //.addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jLabel2)
-                                        .addComponent(jLabel3)))
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4)))
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(21, 21, 21)
@@ -469,7 +487,9 @@ public class TelaIA extends javax.swing.JFrame {
     public List<Professor> getProfessores (){
         List <Professor> professores = new ArrayList<>();
         //professores.addAll(Arrays.asList(TableProfMat));
-        for(int i = 0; i < TableProfMat.getColumnCount(); i++){
+        for(int i = 0; i < TableProfMat.getRowCount(); i++){
+            if (TableProfMat.getValueAt(i,0) == null)
+                break;
             professores.add(new Professor(TableProfMat.getValueAt(i,0).toString()));
         }
         return professores;
@@ -588,32 +608,48 @@ public class TelaIA extends javax.swing.JFrame {
         List<Professor> professores = new ArrayList<>();
         professores.addAll(getProfessores());
         disciplinas.addAll(getMaterias());
-        getPreferencias(professores);
+        //getPreferencias(professores);
         String algorit = AlgoritmoComboBox.getSelectedItem().toString(); //Exemplo algoritmo selecionado
         variaveis = AlocCSP.criarVariaveis(disciplinas);
         valores = AlocCSP.createValues(AlocCSP.criarProfessores(professores), AlocCSP.aulas);
         CspListener.StepCounter<Variable, List<String>> stepCounter = new CspListener.StepCounter<>();
-        Set<Optional<Assignment<Variable, List<String>>>> solucoesList = //usar essa lista pra exibir os resultados na interface
-                usarAlgoritmo(algorit, stepCounter);
-        /*CspSolver<Variable, List<String>> solver;
-        solver = new MinConflictsSolver<>(1000);
-        solver.addCspListener(stepCounter);
-        stepCounter.reset();
-        Optional<Assignment<Variable, List<String>>> solution;
-        Set<Optional<Assignment<Variable, List<String>>>> set = new HashSet<>();
+//        Set<Optional<Assignment<Variable, List<String>>>> solucoesList = //usar essa lista pra exibir os resultados na interface
+//                usarAlgoritmo(algorit, stepCounter);
 
-        for (Variable var : variaveis) {
-            for (List<String> val : valores) {
-                CSP<Variable, List<String>> csp = new AlocCSP(disciplinas, professores, getRestricoes(), new ValorAtribuido<>(var, val));
-                solution = solver.solve(csp);
-                set.add(solution);
-            }
-        }
-        Set<Optional<Assignment<Variable, List<String>>>> solucoesList =  set;
-        */
-
+        AlgoritmoCtrl algoritmoCtrl = new AlgoritmoCtrl(disciplinas, professores, getRestricoes(), variaveis, valores);
+        Set<Optional<Assignment<Variable, List<String>>>> solucoesList =
+                algoritmoCtrl.usarAlgoritmo(algorit, stepCounter);
+        GerenciadorDeResultados gerenciador = new GerenciadorDeResultados(disciplinas, professores, solucoesList);
+        horarios = gerenciador.gerarHorarios();
+        imprimirResultado();
 
     }//GEN-LAST:event_AlocHorarioActionPerformed
+
+    private void imprimirResultado() {
+        Horario horario1 = horarios.get(pageHorario);
+        List<BlocoAula> blocoAulas = horario1.getBlocosOrdenados();
+        System.out.println(blocoAulas.size());
+        int count = 0;
+        for (int i =0; i < 3; i++) {
+            for (int j = 0; j <5; j++) {
+                System.out.println(count);
+                jTable2.setValueAt(blocoAulas.get(count).toString(), i, j);
+                if(blocoAulas.get(count).getDisciplina() != null)
+                    System.out.println(count+" "+blocoAulas.get(count).getDisciplina().getNome()+"  "+blocoAulas.get(count).getDisciplina().getHorariosAlocados().toString());
+                count++;
+            }
+        }
+    }
+
+    private void  passarPagina() {
+        pageHorario++;
+        imprimirResultado();
+    }
+
+    private void voltarPagina() {
+        pageHorario--;
+        imprimirResultado();
+    }
 
     private Set<Optional<Assignment<Variable, List<String>>>> usarAlgoritmo(String algorit,
                                                                                    CspListener.StepCounter<Variable, List<String>> stepCounter) {

@@ -29,7 +29,7 @@ public class BlocoAula implements Cloneable {
 	@Override
 	public String toString() {
 		if(disciplina != null) {
-			return disciplina + "-" +disciplina.getProfessor();
+			return disciplina + "-" + (disciplina.getProfessor() != null ? disciplina.getProfessor() : "semProf");
 		}else {
 			return "-";
 		}
