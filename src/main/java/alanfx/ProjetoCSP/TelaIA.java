@@ -27,6 +27,7 @@ import alanfx.ProjetoCSP.entidades.Horario;
 import alanfx.ProjetoCSP.entidades.Professor;
 import alanfx.ProjetoCSP.persistencia.Persistencia;
 import alanfx.ProjetoCSP.utils.GerenciadorDeResultados;
+import alanfx.ProjetoCSP.utils.Timer;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -728,15 +729,28 @@ public class TelaIA extends javax.swing.JFrame {
 //                usarAlgoritmo(algorit, stepCounter);
 
         AlgoritmoCtrl algoritmoCtrl = new AlgoritmoCtrl(disciplinas, professores, getRestricoes(), variaveis, valores);
+        Timer timer = new Timer();
         Set<Optional<Assignment<Variable, List<String>>>> solucoesList =
                 algoritmoCtrl.usarAlgoritmo(algorit, stepCounter);
+        String tempo = timer.toString();
+        int solucoes = solucoesList.size();
+        String atribuicoes = stepCounter.getResults().get("assignmentCount");
+        String inferencias = stepCounter.getResults().get("inferenceCount");
         GerenciadorDeResultados gerenciador = new GerenciadorDeResultados(disciplinas, professores, solucoesList);
         horarios = gerenciador.gerarHorarios();
         pageHorario = 0;
         new Persistencia().salvarHorarios(horarios);
+        imprimeMetricas(tempo, solucoes, atribuicoes, inferencias);
         imprimirResultado();
 
     }//GEN-LAST:event_AlocHorarioActionPerformed
+
+    private void imprimeMetricas(String tempo, int solucoes, String atribuicoes, String inferencias) {
+        jTable3.setValueAt(tempo, 0, 0);
+        jTable3.setValueAt(solucoes, 0,1);
+        jTable3.setValueAt(atribuicoes, 0,2);
+        jTable3.setValueAt(inferencias, 0,3);
+    }
 
     private void setarCargaHoraria() {
         Horario horario = horarios.get(pageHorario);
