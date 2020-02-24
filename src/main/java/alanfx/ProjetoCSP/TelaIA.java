@@ -803,7 +803,7 @@ public class TelaIA extends javax.swing.JFrame {
         if (CBHorarioDiferente.isSelected()){
             restricoes.add("HorarioDiferente");
         }
-        if (CBPreferenciaDisciplina.isSelected()){
+        if (CBProfessorDiferente.isSelected()){
             restricoes.add("ProfessorDiferente");
         }
         if (CBPreferenciaDisciplina.isSelected()){
