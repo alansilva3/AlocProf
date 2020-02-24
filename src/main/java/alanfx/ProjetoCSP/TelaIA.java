@@ -35,7 +35,7 @@ public class TelaIA extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
 	int pageHorario = 0;
-    List<Horario> horarios;
+    List<Horario> horarios = new ArrayList<>();
     Persistencia persistencia = new Persistencia();
 
     /**
@@ -627,22 +627,18 @@ public class TelaIA extends javax.swing.JFrame {
     }
         
 
-    public void getPreferencias(List <Professor> profs){
-        String nome;
-        String preferencia;
-        for (int i=0; i < TableProfMat.getRowCount(); i++){
-            nome = TableProfMat.getValueAt(i, 1).toString();
-            if (!nome.isEmpty()){
-                for (int j=1; j < TableProfMat.getColumnCount(); j++){
-                    preferencia = TableProfMat.getValueAt(i, j).toString();
-                    if (!preferencia.isEmpty()){
-                        for (Professor p : profs) {
-                            for (Disciplina disciplina : getMaterias()) {
-                                if (disciplina.getNome().equals(preferencia))
-                                    p.addPreferencia(disciplina); // mudar para o tipo disciplina
+    public void setPreferencias(List <Professor> profs){
+        for (int i=0; i < 15; i++) {
+            if(TableProfMat.getValueAt(i, 0) != null) {
+                if (TableProfMat.getValueAt(i, 0).toString().equals(profs.get(i).getNome())) {
+                    for (int j = 1; j < 6; j++) {
+                        if (TableProfMat.getValueAt(i, j) != null) {
+                            Disciplina disciplina = getDisciplinaByName(TableProfMat.getValueAt(i, j).toString());
+                            if (disciplina != null) {
+                                profs.get(i).addPreferencia(disciplina);
                             }
-                        }
-                    } else break;
+                        } else break;
+                    }
                 }
             } else break;
         }
@@ -675,28 +671,33 @@ public class TelaIA extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ButtonAddMateriaActionPerformed
 
+    private Disciplina getDisciplinaByName(String name) {
+        for (Disciplina d: getMaterias()) {
+            if (d.getNome().equals(name)) {
+                return d;
+            }
+        }
+        return null;
+    }
+
     private void AddPreferenciaMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddPreferenciaMatActionPerformed
         String newpref = TextPrefMat.getText();
         String prof = TextPrefMat1.getText();
-        Boolean x=false;
-        for(int i=0 ; i<5; i++){
-            if((TableAddMateria.getValueAt(i,0).equals(newpref))){
-                x=true;
-                break;
-            }   
-        }
-
-        for(int i=0 ; i<15 ; i++){
-             if(TableProfMat.getValueAt(i,0).equals(prof) && x==true){
-                 for(int k=0 ; k< 5 ; k++){
-                    if(TableProfMat.getValueAt(i,k) == null || TableProfMat.getValueAt(i,k).equals(newpref)) {
-                        TableProfMat.setValueAt(newpref,i,k);
-                    break; 
-                    }                   
-                }             
-            }         
-        }
-
+        Disciplina disciplina = getDisciplinaByName(newpref);
+        if (disciplina != null)
+            for (int i=0; i < 15; i++) {
+                if(TableProfMat.getValueAt(i, 0) != null) {
+                    if (TableProfMat.getValueAt(i, 0).toString().equals(prof))
+                        for (int j = 1; j < 6; j++) {
+                            if (TableProfMat.getValueAt(i, j) != null && TableProfMat.getValueAt(i, j).toString().equals(newpref))
+                                return;
+                            if (TableProfMat.getValueAt(i, j) == null) {
+                                TableProfMat.setValueAt(newpref, i, j);
+                                return;
+                            }
+                        }
+                } else break;
+            }
     }//GEN-LAST:event_AddPreferenciaMatActionPerformed
 
     private void TextAddProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextAddProfessorActionPerformed
@@ -716,7 +717,7 @@ public class TelaIA extends javax.swing.JFrame {
         List<Professor> professores = new ArrayList<>();
         professores.addAll(getProfessores());
         disciplinas.addAll(getMaterias());
-        //getPreferencias(professores);
+        setPreferencias(professores);
         String algorit = AlgoritmoComboBox.getSelectedItem().toString(); //Exemplo algoritmo selecionado
         variaveis = AlocCSP.criarVariaveis(disciplinas);
         valores = AlocCSP.createValues(AlocCSP.criarProfessores(professores), AlocCSP.aulas);
