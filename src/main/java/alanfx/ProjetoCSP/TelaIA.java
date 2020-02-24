@@ -28,6 +28,8 @@ import alanfx.ProjetoCSP.entidades.Professor;
 import alanfx.ProjetoCSP.persistencia.Persistencia;
 import alanfx.ProjetoCSP.utils.GerenciadorDeResultados;
 
+import javax.swing.table.DefaultTableModel;
+
 //import java.lang.Reflect.Array;
 
 
@@ -739,6 +741,10 @@ public class TelaIA extends javax.swing.JFrame {
     private void setarCargaHoraria() {
         Horario horario = horarios.get(pageHorario);
         List<Professor> professores = new ArrayList<>();
+        int rowsBefore = jTable4.getRowCount();
+        DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
+        model.getDataVector().removeAllElements();
+        model.setRowCount(rowsBefore);
         for (BlocoAula blocoAula: horario.getBlocos()) {
             if (blocoAula.getDisciplina() != null && blocoAula.getDisciplina().getProfessor() != null && !professores.contains(blocoAula.getDisciplina().getProfessor())) {
                 professores.add(blocoAula.getDisciplina().getProfessor());
