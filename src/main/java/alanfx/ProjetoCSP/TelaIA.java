@@ -736,6 +736,20 @@ public class TelaIA extends javax.swing.JFrame {
 
     }//GEN-LAST:event_AlocHorarioActionPerformed
 
+    private void setarCargaHoraria() {
+        Horario horario = horarios.get(pageHorario);
+        List<Professor> professores = new ArrayList<>();
+        for (BlocoAula blocoAula: horario.getBlocos()) {
+            if (blocoAula.getDisciplina() != null && blocoAula.getDisciplina().getProfessor() != null && !professores.contains(blocoAula.getDisciplina().getProfessor())) {
+                professores.add(blocoAula.getDisciplina().getProfessor());
+            }
+        }
+        for (int i=0; i < professores.size(); i++) {
+            jTable4.setValueAt(professores.get(i).getNome(), i, 0);
+            jTable4.setValueAt(professores.get(i).getCargaHoraria(), i, 1);
+        }
+    }
+
     private void imprimirResultado() {
         Horario horario1 = horarios.get(pageHorario);
         List<BlocoAula> blocoAulas = horario1.getBlocosOrdenados();
@@ -750,6 +764,7 @@ public class TelaIA extends javax.swing.JFrame {
                 count++;
             }
         }
+        setarCargaHoraria();
     }
 
     private void  passarPagina() {
