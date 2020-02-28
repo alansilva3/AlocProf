@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>alanfx</groupId>
-  <artifactId>ProjetoCSP</artifactId>
+  <artifactId>projetocsp</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
@@ -18,7 +18,7 @@
           <archive>
             <manifest>
               <mainClass>
-                alanfx.ProjetoCSP.Main
+                alanfx.projetocsp.TelaIA
               </mainClass>
             </manifest>
           </archive>

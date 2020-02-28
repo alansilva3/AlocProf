@@ -1,4 +1,4 @@
-package alanfx.ProjetoCSP;
+package alanfx.projetocsp;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
