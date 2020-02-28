@@ -1,4 +1,4 @@
-package alanfx.ProjetoCSP.entidades;
+package alanfx.projetocsp.entidades;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +16,11 @@ public class Disciplina implements Cloneable {
 
 	private Professor professor;
 
-	public Disciplina(String nome, Integer cred) {
+	public Disciplina(String nome, Integer cred, List<String> horariosFixos) {
 		this.nome = nome;
 		this.cred = cred;
 		this.vars = criarVariaveis();
-		this.horariosFixos = new ArrayList<>();
+		this.horariosFixos = horariosFixos;
 		this.horariosAlocados = new ArrayList<>();
 		this.professor = null;
 	}

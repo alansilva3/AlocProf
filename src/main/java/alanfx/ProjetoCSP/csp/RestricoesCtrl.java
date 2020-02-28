@@ -1,17 +1,17 @@
-package alanfx.ProjetoCSP.csp;
+package alanfx.projetocsp.csp;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import aima.core.search.csp.Variable;
-import alanfx.ProjetoCSP.entidades.Disciplina;
-import alanfx.ProjetoCSP.restricoes.HorarioDiferente;
-import alanfx.ProjetoCSP.restricoes.HorarioFixo;
-import alanfx.ProjetoCSP.restricoes.PreferenciaDisciplina;
-import alanfx.ProjetoCSP.restricoes.ProfessorDiferente;
-import alanfx.ProjetoCSP.restricoes.util.PriorizarProfessores;
-import alanfx.ProjetoCSP.restricoes.util.UnicoProfessor;
+import alanfx.projetocsp.entidades.Disciplina;
+import alanfx.projetocsp.restricoes.HorarioDiferente;
+import alanfx.projetocsp.restricoes.HorarioFixo;
+import alanfx.projetocsp.restricoes.PreferenciaDisciplina;
+import alanfx.projetocsp.restricoes.ProfessorDiferente;
+import alanfx.projetocsp.restricoes.util.PriorizarProfessores;
+import alanfx.projetocsp.restricoes.util.UnicoProfessor;
 
 public class RestricoesCtrl {
 
@@ -42,7 +42,7 @@ public class RestricoesCtrl {
 
 	private void addAllHorarioFixo(List<Disciplina> disciplinas) {
 		for(Disciplina disc : disciplinas) {
-			if(!disc.getHorariosFixos().isEmpty()) {
+			if(disc.getHorariosFixos().size() > 0) {
 				for(int i = 0; i< disc.getHorariosFixos().size();i++) {
 					csp.addConstraint(new HorarioFixo<>(disc.getVars().get(i), disc.getHorariosFixos().get(i)));
 				}

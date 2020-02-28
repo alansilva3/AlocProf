@@ -1,4 +1,4 @@
-package alanfx.ProjetoCSP.restricoes;
+package alanfx.projetocsp.restricoes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import aima.core.search.csp.Constraint;
 import aima.core.search.csp.Variable;
 
 /**
- * Representa uma restrição unária que associa uma variável a um horario.
+ * Representa uma restrição unária que associa uma disciplina a um horario.
  * 
  */
 public class HorarioFixo<VAR extends Variable, VAL> implements Constraint<VAR, List<String>> {

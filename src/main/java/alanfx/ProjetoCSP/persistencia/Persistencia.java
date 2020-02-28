@@ -1,18 +1,18 @@
-package alanfx.ProjetoCSP.persistencia;
+package alanfx.projetocsp.persistencia;
 
-import alanfx.ProjetoCSP.entidades.Horario;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import alanfx.ProjetoCSP.entidades.Disciplina;
-import alanfx.ProjetoCSP.entidades.Professor;
-
-import java.lang.reflect.Type;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import alanfx.projetocsp.entidades.Disciplina;
+import alanfx.projetocsp.entidades.Horario;
+import alanfx.projetocsp.entidades.Professor;
 
 public class Persistencia {
     private Gson gson = new Gson();

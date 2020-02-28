@@ -1,9 +1,9 @@
-package alanfx.ProjetoCSP.entidades;
+package alanfx.projetocsp.entidades;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import alanfx.ProjetoCSP.csp.AlocCSP;
+import alanfx.projetocsp.csp.AlocCSP;
 
 public class Horario {
 

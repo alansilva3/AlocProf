@@ -1,4 +1,4 @@
-package alanfx.ProjetoCSP.csp;
+package alanfx.projetocsp.csp;
 
 import java.util.HashSet;
 import java.util.List;
@@ -13,26 +13,24 @@ import aima.core.search.csp.CspSolver;
 import aima.core.search.csp.FlexibleBacktrackingSolver;
 import aima.core.search.csp.MinConflictsSolver;
 import aima.core.search.csp.Variable;
-import alanfx.ProjetoCSP.entidades.Disciplina;
-import alanfx.ProjetoCSP.entidades.Professor;
-import alanfx.ProjetoCSP.restricoes.util.ValorAtribuido;
+import alanfx.projetocsp.entidades.Disciplina;
+import alanfx.projetocsp.entidades.Professor;
+import alanfx.projetocsp.restricoes.util.ValorAtribuido;
 
 public class AlgoritmoCtrl {
 	
-	private static List<Disciplina> disciplinas;
-	private static List<Professor> professores;
-	private static List<String> restricoesList;
-	private static List<Variable> variaveis;
-	private static List<List<String>> valores;
+	private List<Disciplina> disciplinas;
+	private List<Professor> professores;
+	private List<String> restricoesList;
+	private List<Variable> variaveis;
+	private List<List<String>> valores;
 	
-	public AlgoritmoCtrl(List<Disciplina> disciplinas, List<Professor> professores, List<String> restricoesList,
-			List<Variable> variaveis, List<List<String>> valores) {
-		super();
-		AlgoritmoCtrl.disciplinas = disciplinas;
-		AlgoritmoCtrl.professores = professores;
-		AlgoritmoCtrl.restricoesList = restricoesList;
-		AlgoritmoCtrl.variaveis = variaveis;
-		AlgoritmoCtrl.valores = valores;
+	public AlgoritmoCtrl(List<Disciplina> disciplinas, List<Professor> professores, List<String> restricoesList) {
+		this.disciplinas = disciplinas;
+		this.professores = professores;
+		this.restricoesList = restricoesList;
+		this.variaveis = AlocCSP.criarVariaveis(disciplinas);
+        this.valores = AlocCSP.createValues(AlocCSP.criarProfessores(professores), AlocCSP.aulas);
 	}
 
 	public Set<Optional<Assignment<Variable, List<String>>>> usarAlgoritmo(String algorit,
@@ -67,8 +65,11 @@ public class AlgoritmoCtrl {
 	private Set<Optional<Assignment<Variable, List<String>>>> getSolucoes(CspSolver<Variable, List<String>> solver) {
 		Optional<Assignment<Variable, List<String>>> solution;
 		Set<Optional<Assignment<Variable, List<String>>>> set = new HashSet<>();
+		// long cont = 0;
 		for (Variable var : variaveis) {
 			for (List<String> val : valores) {
+				// cont++;
+				// System.out.println(cont);
 				CSP<Variable, List<String>> csp = new AlocCSP(disciplinas, professores, restricoesList, new ValorAtribuido<>(var, val));
 				solution = solver.solve(csp);
 				if(!solution.isEmpty())

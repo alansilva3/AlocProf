@@ -9,30 +9,28 @@
  * @author Herbert
  */
 
-package alanfx.ProjetoCSP;
+package alanfx.projetocsp;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.swing.table.DefaultTableModel;
+
 import aima.core.search.csp.Assignment;
 import aima.core.search.csp.CspListener;
 import aima.core.search.csp.Variable;
-import alanfx.ProjetoCSP.csp.AlgoritmoCtrl;
-import alanfx.ProjetoCSP.csp.AlocCSP;
-import alanfx.ProjetoCSP.entidades.BlocoAula;
-import alanfx.ProjetoCSP.entidades.Disciplina;
-import alanfx.ProjetoCSP.entidades.Horario;
-import alanfx.ProjetoCSP.entidades.Professor;
-import alanfx.ProjetoCSP.persistencia.Persistencia;
-import alanfx.ProjetoCSP.utils.GerenciadorDeResultados;
-import alanfx.ProjetoCSP.utils.Timer;
-
-import javax.swing.table.DefaultTableModel;
+import alanfx.projetocsp.csp.AlgoritmoCtrl;
+import alanfx.projetocsp.entidades.BlocoAula;
+import alanfx.projetocsp.entidades.Disciplina;
+import alanfx.projetocsp.entidades.Horario;
+import alanfx.projetocsp.entidades.Professor;
+import alanfx.projetocsp.persistencia.Persistencia;
+import alanfx.projetocsp.utils.GerenciadorDeResultados;
+import alanfx.projetocsp.utils.Timer;
 
 //import java.lang.Reflect.Array;
-
 
 public class TelaIA extends javax.swing.JFrame {
 
@@ -63,7 +61,7 @@ public class TelaIA extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        new javax.swing.ButtonGroup();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -114,21 +112,13 @@ public class TelaIA extends javax.swing.JFrame {
 
         jTable2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Segunda", "Terça", "Quarta", "Quinta", "Sexta"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
+                new Object[][] { { null, null, null, null, null }, { null, null, null, null, null },
+                        { null, null, null, null, null } },
+                new String[] { "Segunda", "Terça", "Quarta", "Quinta", "Sexta" }) {
+            boolean[] canEdit = new boolean[] { false, false, false, false, false };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jTable2.setAutoscrolls(false);
@@ -148,33 +138,19 @@ public class TelaIA extends javax.swing.JFrame {
         jLabel4.setText("21:00");
 
         TableProfMat.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Professores", "Materia 1", "Materia 2", "Materia 3", "Materia 4", "Materia 5"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
+                new Object[][] { { null, null, null, null, null, null }, { null, null, null, null, null, null },
+                        { null, null, null, null, null, null }, { null, null, null, null, null, null },
+                        { null, null, null, null, null, null }, { null, null, null, null, null, null },
+                        { null, null, null, null, null, null }, { null, null, null, null, null, null },
+                        { null, null, null, null, null, null }, { null, null, null, null, null, null },
+                        { null, null, null, null, null, null }, { null, null, null, null, null, null },
+                        { null, null, null, null, null, null }, { null, null, null, null, null, null },
+                        { null, null, null, null, null, null } },
+                new String[] { "Professores", "Disciplina 1", "Disciplina 2", "Disciplina 3", "Disciplina 4", "Disciplina 5" }) {
+            boolean[] canEdit = new boolean[] { false, false, false, false, false, false };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         TableProfMat.getTableHeader().setResizingAllowed(false);
@@ -183,14 +159,14 @@ public class TelaIA extends javax.swing.JFrame {
 
         TextAddMateria.setToolTipText("Insira o Nome do professor");
 
-        AddProfessor.setText("AddProfessor");
+        AddProfessor.setText("Add professor");
         AddProfessor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddProfessorActionPerformed(evt);
             }
         });
 
-        ButtonAddMateria.setText("AddMateria");
+        ButtonAddMateria.setText("Add disciplina");
         ButtonAddMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonAddMateriaActionPerformed(evt);
@@ -198,40 +174,20 @@ public class TelaIA extends javax.swing.JFrame {
         });
 
         TableAddMateria.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Disciplinas Adicionadas", "Creditos", "HorárioFixo"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
+                new Object[][] { { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
+                        { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
+                        { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
+                        { null, null, null }, { null, null, null }, { null, null, null } },
+                new String[] { "Disciplinas", "Creditos", "Horários fixos" }) {
+            Class[] types = new Class[] { java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class };
+            boolean[] canEdit = new boolean[] { false, false, false };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         TableAddMateria.getTableHeader().setResizingAllowed(false);
@@ -249,7 +205,7 @@ public class TelaIA extends javax.swing.JFrame {
             }
         });
 
-        AddPreferenciaMat.setText("AddPreferencia");
+        AddPreferenciaMat.setText("Add preferencia");
         AddPreferenciaMat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddPreferenciaMatActionPerformed(evt);
@@ -270,17 +226,17 @@ public class TelaIA extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("NomeDoProfessor");
+        jLabel1.setText("Professor");
 
-        jLabel5.setText("NomeDoProfessor");
+        jLabel5.setText("Professor");
 
-        jLabel6.setText("DisciplinaPreferencia");
+        jLabel6.setText("Disciplina preferencia");
 
         jLabel7.setText("Disciplina");
 
         AlocHorario.setBackground(new java.awt.Color(255, 0, 0));
         AlocHorario.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        AlocHorario.setText("Alocar Horários");
+        AlocHorario.setText("Alocar");
         AlocHorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AlocHorarioActionPerformed(evt);
@@ -303,16 +259,24 @@ public class TelaIA extends javax.swing.JFrame {
                 passarPagina();
             }
         });
-        jLabel9.setText("Horarios Fixos");
+        jLabel9.setText("Fixar horário");
 
         HorariosFixosList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "N/A", "SEG17", "SEG19", "SEG21", "TER17", "TER19", "TER21", "QUA17", "QUA19", "QUA21", "QUI17", "QUI19", "QUI21", "SEX17", "SEX19", "SEX21", " " };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            String[] strings = {" ", "SEG17", "SEG19", "SEG21", "TER17", "TER19", "TER21", "QUA17", "QUA19", "QUA21",
+                    "QUI17", "QUI19", "QUI21", "SEX17", "SEX19", "SEX21"};
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public String getElementAt(int i) {
+                return strings[i];
+            }
         });
         jScrollPane1.setViewportView(HorariosFixosList);
 
-        AlgoritmoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MinConflictsSolver", "Backtracking + MRV & DEG + LCV + AC3", "Backtracking + MRV & DEG", "Backtracking" }));
+        AlgoritmoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MinConflictsSolver",
+                "Backtracking + MRV & DEG + LCV + AC3", "Backtracking + MRV & DEG", "Backtracking" }));
         AlgoritmoComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AlgoritmoComboBoxActionPerformed(evt);
@@ -349,20 +313,12 @@ public class TelaIA extends javax.swing.JFrame {
         jLabel10.setText("Restrições");
 
         jTable3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null}
-            },
-            new String [] {
-                "Tempo", "Soluções", "Atribuições", "Inferencias"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, false
-            };
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(new Object[][] { { null, null, null, null } },
+                new String[] { "Tempo", "Soluções", "Atribuições", "Inferencias" }) {
+            boolean[] canEdit = new boolean[] { false, false, true, false };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jTable3.setAutoscrolls(false);
@@ -372,37 +328,19 @@ public class TelaIA extends javax.swing.JFrame {
         jTable3.getTableHeader().setResizingAllowed(false);
         jTable3.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTable3);
-        jTable3.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jTable3.getColumnModel().getSelectionModel()
+                .setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         jTable4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Professor", "Carga Horaria"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
+                new Object[][] { { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+                        { null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+                        { null, null }, { null, null }, { null, null }, { null, null } },
+                new String[] { "Professor", "Carga Horaria" }) {
+            boolean[] canEdit = new boolean[] { false, false };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jTable4.setAutoscrolls(false);
@@ -412,227 +350,298 @@ public class TelaIA extends javax.swing.JFrame {
         jTable4.getTableHeader().setResizingAllowed(false);
         jTable4.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(jTable4);
-        jTable4.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jTable4.getColumnModel().getSelectionModel()
+                .setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
+                .createSequentialGroup().addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                        javax.swing.GroupLayout.Alignment.TRAILING,
+                        layout.createSequentialGroup().addGroup(layout
+                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup().addGroup(layout
+                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 368,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup().addGroup(layout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel8)
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(TextAddMateria,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 126,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(
+                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(TextAddMateriaCred,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 36,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(12, 12, 12)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jScrollPane1,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(26, 26, 26).addComponent(ButtonAddMateria))
+                                                        .addComponent(jLabel9))))
+                                        .addGap(32, 32, 32)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(CBProfessorDiferente)
+                                                        .addComponent(CBPreferenciaDisciplina))
+                                                .addGroup(layout.createSequentialGroup().addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(CBHorarioFixo).addComponent(CBHorarioDiferente)
+                                                        .addComponent(jLabel10)).addGap(28, 28, 28))))
+                                .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel8)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(TextAddMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
+                                                .createSequentialGroup()
+                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(TextAddMateriaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(12, 12, 12)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(26, 26, 26)
-                                                .addComponent(ButtonAddMateria))
-                                            .addComponent(jLabel9))))
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(CBProfessorDiferente)
-                                        .addComponent(CBPreferenciaDisciplina))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(CBHorarioFixo)
-                                            .addComponent(CBHorarioDiferente)
-                                            .addComponent(jLabel10))
-                                        .addGap(28, 28, 28))))
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)
-                                .addComponent(AlocHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel11)
-                            .addComponent(AlgoritmoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane4)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5)
-                                        .addComponent(TextAddProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(AddProfessor)
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1)
-                                        .addComponent(TextPrefMat1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(TextPrefMat, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6))
-                                    .addGap(18, 18, 18)
-                                    .addComponent(AddPreferenciaMat, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(18, 18, 18)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel8))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(TextAddMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(TextAddMateriaCred, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(3, 3, 3))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel9)
+                                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(41, 41, 41).addComponent(AlocHorario,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 172,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel11)
+                                        .addComponent(AlgoritmoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 324,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 414,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup().addGroup(layout
+                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jScrollPane4)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel5).addComponent(TextAddProfessor,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 154,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                .addComponent(ButtonAddMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(9, 9, 9)))))
-                                .addGap(3, 3, 3)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(AlocHorario)
-                                    .addComponent(jButton1)
-                                    .addComponent(jButton2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(AlgoritmoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBHorarioDiferente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBProfessorDiferente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBPreferenciaDisciplina)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBHorarioFixo)
-                        .addGap(30, 30, 30)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                                                .addComponent(AddProfessor).addGap(18, 18, 18)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel1).addComponent(TextPrefMat1,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 144,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(TextPrefMat,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 142,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel6))
+                                                .addGap(18, 18, 18).addComponent(AddPreferenciaMat,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 121,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(18, 18, 18).addComponent(jScrollPane6,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel2).addComponent(jLabel3).addComponent(jLabel4))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 958,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(AddProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TextAddProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(TextPrefMat1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TextPrefMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(AddPreferenciaMat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
+                                .addGroup(layout.createSequentialGroup().addGap(35, 35, 35).addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 18,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 19,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                        layout.createSequentialGroup().addContainerGap().addComponent(jScrollPane2,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE, 103,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
+                                .createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                                layout.createSequentialGroup().addGroup(layout.createParallelGroup(
+                                                        javax.swing.GroupLayout.Alignment.TRAILING).addGroup(
+                                                                javax.swing.GroupLayout.Alignment.LEADING, layout
+                                                                        .createSequentialGroup().addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)
+                                                                        .addGroup(
+                                                                                layout.createParallelGroup(
+                                                                                        javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                                        .addComponent(jLabel7)
+                                                                                        .addComponent(jLabel8))
+                                                                        .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                        .addGroup(layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                                .addComponent(TextAddMateria,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(TextAddMateriaCred,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addGap(3, 3, 3))
+                                                        .addGroup(layout.createSequentialGroup().addPreferredGap(
+                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(jLabel9)
+                                                                                .addPreferredGap(
+                                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                .addComponent(jScrollPane1,
+                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                        39, Short.MAX_VALUE))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                                                .addComponent(ButtonAddMateria,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        23,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addGap(9, 9, 9)))))
+                                                        .addGap(3, 3, 3)
+                                                        .addComponent(jScrollPane5,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 123,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup().addGap(20, 20, 20)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(AlocHorario).addComponent(jButton1)
+                                                        .addComponent(jButton2))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel11)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(AlgoritmoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 53,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                        layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel10)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(CBHorarioDiferente)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(CBProfessorDiferente)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(CBPreferenciaDisciplina)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(CBHorarioFixo).addGap(30, 30, 30)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addGroup(layout
+                                .createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup().addComponent(jLabel5)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(AddProfessor,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 23,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(TextAddProfessor,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup().addGap(3, 3, 3).addGroup(
+                                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel1).addComponent(jLabel6))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(TextPrefMat1,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(TextPrefMat,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(AddPreferenciaMat, javax.swing.GroupLayout.Alignment.TRAILING,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE, 23,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18).addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 201,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()));
 
         TextAddMateriaCred.getAccessibleContext().setAccessibleName("CreditoMatForm");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private static List<Variable> variaveis;
-    private static List<List<String>> valores;
-
-    public List<Professor> getProfessores (){
-        List <Professor> professores = new ArrayList<>();
-        //professores.addAll(Arrays.asList(TableProfMat));
-        for(int i = 0; i < TableProfMat.getRowCount(); i++){
-            if (TableProfMat.getValueAt(i,0) == null)
+    public List<Professor> getProfessores() {
+        List<Professor> professores = new ArrayList<>();
+        // professores.addAll(Arrays.asList(TableProfMat));
+        for (int i = 0; i < TableProfMat.getRowCount(); i++) {
+            if (TableProfMat.getValueAt(i, 0) == null)
                 break;
-            professores.add(new Professor(TableProfMat.getValueAt(i,0).toString()));
+            professores.add(new Professor(TableProfMat.getValueAt(i, 0).toString()));
         }
         return professores;
     }
-    
-    public List<Integer> getCreditos(){
-        List <Integer> creditos = new ArrayList<Integer>();
-        for (int i=0; i < TableAddMateria.getColumnCount(); i++){
-            creditos.add(Integer.parseInt(TableAddMateria.getValueAt(i,0).toString()));
+
+    public List<Integer> getCreditos() {
+        List<Integer> creditos = new ArrayList<Integer>();
+        for (int i = 0; i < TableAddMateria.getColumnCount(); i++) {
+            creditos.add(Integer.parseInt(TableAddMateria.getValueAt(i, 0).toString()));
         }
         return creditos;
     }
 
-    public List<Disciplina> getMaterias(){
-        List <Disciplina> materias = new ArrayList<>();
-        //List <Integer> creditos = new ArrayList<Integer>();
-        //List <Disciplina> disciplinas = new ArrayList<>();
-        //Disciplina discip = null;
-        for(int i = 0; i < TableAddMateria.getRowCount(); i++){
-            if(TableAddMateria.getValueAt(i,0) != null)
-            materias.add(new Disciplina(
-                    TableAddMateria.getValueAt(i,0).toString(),
-                    Integer.parseInt(TableAddMateria.getValueAt(i,1).toString())
-            ));
+    public List<Disciplina> getDisciplinas() {
+        List<Disciplina> disciplinas = new ArrayList<>();
+        for (int i = 0; i < TableAddMateria.getRowCount(); i++) {
+            if (TableAddMateria.getValueAt(i, 0) != null)
+                disciplinas.add(new Disciplina(TableAddMateria.getValueAt(i, 0).toString(),
+                        Integer.parseInt(TableAddMateria.getValueAt(i, 1).toString()),
+                        setHorarioFixo(TableAddMateria.getValueAt(i, 2).toString())));
         }
-        return materias;
+        return disciplinas;
     }
-        
 
-    public void setPreferencias(List <Professor> profs){
-        for (int i=0; i < 15; i++) {
-            if(TableProfMat.getValueAt(i, 0) != null) {
+    private List<String> setHorarioFixo(String horarios) {
+        List<String> list = new ArrayList<>();
+        if (horarios.length() < 4) //Caso o valor selecionado seja o horario vazio
+            return list;
+        if (!horarios.contains(",")) {
+            list.add(horarios.substring(1, horarios.length() - 1).trim());
+            return list;
+        }
+        String[] array = horarios.split(",");
+        for (int i = 0; i < array.length; i++) {
+            if (i == 0) {
+                list.add(array[i].substring(1).trim());
+            } else if (i == array.length - 1) {
+                String str = array[i].substring(0, array[i].length() - 1).trim();
+                list.add(str);
+            } else
+                list.add(array[i].trim());
+        }
+        return list;
+    }
+
+    public void setPreferencias(List<Professor> profs) {
+        for (int i = 0; i < 15; i++) {
+            if (TableProfMat.getValueAt(i, 0) != null) {
                 if (TableProfMat.getValueAt(i, 0).toString().equals(profs.get(i).getNome())) {
                     for (int j = 1; j < 6; j++) {
                         if (TableProfMat.getValueAt(i, j) != null) {
@@ -640,42 +649,42 @@ public class TelaIA extends javax.swing.JFrame {
                             if (disciplina != null) {
                                 profs.get(i).addPreferencia(disciplina);
                             }
-                        } else break;
+                        } else
+                            break;
                     }
                 }
-            } else break;
+            } else
+                break;
         }
     }
 
-    private void AddProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddProfessorActionPerformed
-         String newprof = TextAddProfessor.getText();
-
-        for(int i=0 ; i<15 ; i++){
-            if(TableProfMat.getValueAt(i,0) == null || (TableProfMat.getValueAt(i,0).equals(newprof))){
-                TableProfMat.setValueAt(newprof,i,0);
+    private void AddProfessorActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_AddProfessorActionPerformed
+        String newprof = TextAddProfessor.getText();
+        for (int i = 0; i < 15; i++) {
+            if (TableProfMat.getValueAt(i, 0) == null || (TableProfMat.getValueAt(i, 0).equals(newprof))) {
+                TableProfMat.setValueAt(newprof, i, 0);
                 break;
             }
         }
+    }// GEN-LAST:event_AddProfessorActionPerformed
 
-    }//GEN-LAST:event_AddProfessorActionPerformed
-
-    private void ButtonAddMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddMateriaActionPerformed
+    private void ButtonAddMateriaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ButtonAddMateriaActionPerformed
         String newmat = TextAddMateria.getText();
         int matcred = Integer.parseInt(TextAddMateriaCred.getText());
-        if (!newmat.isEmpty() && !TextAddMateriaCred.getText().isEmpty()){
-            for(int i=0 ; i< TableProfMat.getRowCount() ; i++){
-                if(TableAddMateria.getValueAt(i,0) == null || (TableAddMateria.getValueAt(i,0).equals(newmat))){
-                    TableAddMateria.setValueAt(newmat,i,0);
-                    TableAddMateria.setValueAt(matcred,i,1);
+        if (!newmat.isEmpty() && !TextAddMateriaCred.getText().isEmpty()) {
+            for (int i = 0; i < TableProfMat.getRowCount(); i++) {
+                if (TableAddMateria.getValueAt(i, 0) == null || (TableAddMateria.getValueAt(i, 0).equals(newmat))) {
+                    TableAddMateria.setValueAt(newmat, i, 0);
+                    TableAddMateria.setValueAt(matcred, i, 1);
                     TableAddMateria.setValueAt(HorariosFixosList.getSelectedValuesList(), i, 2);
                     break;
                 }
             }
         }
-    }//GEN-LAST:event_ButtonAddMateriaActionPerformed
+    }// GEN-LAST:event_ButtonAddMateriaActionPerformed
 
     private Disciplina getDisciplinaByName(String name) {
-        for (Disciplina d: getMaterias()) {
+        for (Disciplina d : getDisciplinas()) {
             if (d.getNome().equals(name)) {
                 return d;
             }
@@ -683,55 +692,41 @@ public class TelaIA extends javax.swing.JFrame {
         return null;
     }
 
-    private void AddPreferenciaMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddPreferenciaMatActionPerformed
+    private void AddPreferenciaMatActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_AddPreferenciaMatActionPerformed
         String newpref = TextPrefMat.getText();
         String prof = TextPrefMat1.getText();
         Disciplina disciplina = getDisciplinaByName(newpref);
         if (disciplina != null)
-            for (int i=0; i < 15; i++) {
-                if(TableProfMat.getValueAt(i, 0) != null) {
+            for (int i = 0; i < 15; i++) {
+                if (TableProfMat.getValueAt(i, 0) != null) {
                     if (TableProfMat.getValueAt(i, 0).toString().equals(prof))
                         for (int j = 1; j < 6; j++) {
-                            if (TableProfMat.getValueAt(i, j) != null && TableProfMat.getValueAt(i, j).toString().equals(newpref))
+                            if (TableProfMat.getValueAt(i, j) != null
+                                    && TableProfMat.getValueAt(i, j).toString().equals(newpref))
                                 return;
                             if (TableProfMat.getValueAt(i, j) == null) {
                                 TableProfMat.setValueAt(newpref, i, j);
                                 return;
                             }
                         }
-                } else break;
+                } else
+                    break;
             }
-    }//GEN-LAST:event_AddPreferenciaMatActionPerformed
+    }// GEN-LAST:event_AddPreferenciaMatActionPerformed
 
-    private void TextAddProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextAddProfessorActionPerformed
-
-    }//GEN-LAST:event_TextAddProfessorActionPerformed
-
-    private void TextPrefMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPrefMatActionPerformed
-
-    }//GEN-LAST:event_TextPrefMatActionPerformed
-
-    private void TextPrefMat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPrefMat1ActionPerformed
-
-    }//GEN-LAST:event_TextPrefMat1ActionPerformed
-
-    private void AlocHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlocHorarioActionPerformed
+    private void AlocHorarioActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_AlocHorarioActionPerformed
         List<Disciplina> disciplinas = new ArrayList<>();
         List<Professor> professores = new ArrayList<>();
         professores.addAll(getProfessores());
-        disciplinas.addAll(getMaterias());
+        disciplinas.addAll(getDisciplinas());
         setPreferencias(professores);
-        String algorit = AlgoritmoComboBox.getSelectedItem().toString(); //Exemplo algoritmo selecionado
-        variaveis = AlocCSP.criarVariaveis(disciplinas);
-        valores = AlocCSP.createValues(AlocCSP.criarProfessores(professores), AlocCSP.aulas);
+        String algorit = AlgoritmoComboBox.getSelectedItem().toString();
+        
         CspListener.StepCounter<Variable, List<String>> stepCounter = new CspListener.StepCounter<>();
-//        Set<Optional<Assignment<Variable, List<String>>>> solucoesList = //usar essa lista pra exibir os resultados na interface
-//                usarAlgoritmo(algorit, stepCounter);
-
-        AlgoritmoCtrl algoritmoCtrl = new AlgoritmoCtrl(disciplinas, professores, getRestricoes(), variaveis, valores);
+        
+        AlgoritmoCtrl algoritmoCtrl = new AlgoritmoCtrl(disciplinas, professores, getRestricoes());
         Timer timer = new Timer();
-        Set<Optional<Assignment<Variable, List<String>>>> solucoesList =
-                algoritmoCtrl.usarAlgoritmo(algorit, stepCounter);
+        Set<Optional<Assignment<Variable, List<String>>>> solucoesList = algoritmoCtrl.usarAlgoritmo(algorit, stepCounter);
         String tempo = timer.toString();
         int solucoes = solucoesList.size();
         String atribuicoes = stepCounter.getResults().get("assignmentCount");
@@ -742,16 +737,15 @@ public class TelaIA extends javax.swing.JFrame {
         new Persistencia().salvarHorarios(horarios);
         imprimeMetricas(tempo, solucoes, atribuicoes, inferencias);
         imprimirResultado();
-
-    }//GEN-LAST:event_AlocHorarioActionPerformed
-
+    }// GEN-LAST:event_AlocHorarioActionPerformed
+    
     private void imprimeMetricas(String tempo, int solucoes, String atribuicoes, String inferencias) {
         jTable3.setValueAt(tempo, 0, 0);
-        jTable3.setValueAt(solucoes, 0,1);
-        jTable3.setValueAt(atribuicoes, 0,2);
-        jTable3.setValueAt(inferencias, 0,3);
+        jTable3.setValueAt(solucoes, 0, 1);
+        jTable3.setValueAt(atribuicoes, 0, 2);
+        jTable3.setValueAt(inferencias, 0, 3);
     }
-
+    
     private void setarCargaHoraria() {
         Horario horario = horarios.get(pageHorario);
         List<Professor> professores = new ArrayList<>();
@@ -759,87 +753,105 @@ public class TelaIA extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
         model.getDataVector().removeAllElements();
         model.setRowCount(rowsBefore);
-        for (BlocoAula blocoAula: horario.getBlocos()) {
-            if (blocoAula.getDisciplina() != null && blocoAula.getDisciplina().getProfessor() != null && !professores.contains(blocoAula.getDisciplina().getProfessor())) {
+        for (BlocoAula blocoAula : horario.getBlocos()) {
+            if (blocoAula.getDisciplina() != null && blocoAula.getDisciplina().getProfessor() != null
+            && !professores.contains(blocoAula.getDisciplina().getProfessor())) {
                 professores.add(blocoAula.getDisciplina().getProfessor());
             }
         }
-        for (int i=0; i < professores.size(); i++) {
+        for (int i = 0; i < professores.size(); i++) {
             jTable4.setValueAt(professores.get(i).getNome(), i, 0);
             jTable4.setValueAt(professores.get(i).getCargaHoraria(), i, 1);
         }
     }
-
+    
     private void imprimirResultado() {
         Horario horario1 = horarios.get(pageHorario);
         List<BlocoAula> blocoAulas = horario1.getBlocosOrdenados();
         System.out.println(blocoAulas.size());
         int count = 0;
-        for (int i =0; i < 3; i++) {
-            for (int j = 0; j <5; j++) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 5; j++) {
                 System.out.println(count);
                 jTable2.setValueAt(blocoAulas.get(count).toString(), i, j);
-                if(blocoAulas.get(count).getDisciplina() != null)
-                    System.out.println(count+" "+blocoAulas.get(count).getDisciplina().getNome()+"  "+blocoAulas.get(count).getDisciplina().getHorariosAlocados().toString());
+                if (blocoAulas.get(count).getDisciplina() != null)
+                System.out.println(count + " " + blocoAulas.get(count).getDisciplina().getNome() + "  "
+                + blocoAulas.get(count).getDisciplina().getHorariosAlocados().toString());
                 count++;
             }
         }
         setarCargaHoraria();
     }
-
-    private void  passarPagina() {
+    
+    private void passarPagina() {
         pageHorario++;
         imprimirResultado();
     }
-
+    
     private void voltarPagina() {
-        if(pageHorario>0)
-            pageHorario--;
+        if (pageHorario > 0)
+        pageHorario--;
         imprimirResultado();
     }
-
-    private List <String> getRestricoes(){
+    
+    private List<String> getRestricoes() {
         List<String> restricoes = new ArrayList<>();
-        if (CBHorarioDiferente.isSelected()){
+        if (CBHorarioDiferente.isSelected()) {
             restricoes.add("HorarioDiferente");
         }
-        if (CBProfessorDiferente.isSelected()){
+        if (CBProfessorDiferente.isSelected()) {
             restricoes.add("ProfessorDiferente");
         }
-        if (CBPreferenciaDisciplina.isSelected()){
+        if (CBPreferenciaDisciplina.isSelected()) {
             restricoes.add("PreferenciaDisciplina");
         }
-        if (CBHorarioFixo.isSelected()){
+        if (CBHorarioFixo.isSelected()) {
             restricoes.add("HorarioFixo");
         }
         return restricoes;
-        //("HorarioDiferente", "ProfessorDiferente", "PreferenciaDisciplina", "HorarioFixo")
+        // ("HorarioDiferente", "ProfessorDiferente", "PreferenciaDisciplina",
+        // "HorarioFixo")
     }
+    
+    private void TextAddProfessorActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_TextAddProfessorActionPerformed
 
-    private void AlgoritmoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlgoritmoComboBoxActionPerformed
+    }// GEN-LAST:event_TextAddProfessorActionPerformed
 
-    }//GEN-LAST:event_AlgoritmoComboBoxActionPerformed
+    private void TextPrefMatActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_TextPrefMatActionPerformed
 
-    private void CBHorarioDiferenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBHorarioDiferenteActionPerformed
+    }// GEN-LAST:event_TextPrefMatActionPerformed
 
-    }//GEN-LAST:event_CBHorarioDiferenteActionPerformed
+    private void TextPrefMat1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_TextPrefMat1ActionPerformed
 
-    private void CBPreferenciaDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBPreferenciaDisciplinaActionPerformed
+    }// GEN-LAST:event_TextPrefMat1ActionPerformed
+    
+    private void AlgoritmoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_AlgoritmoComboBoxActionPerformed
 
-    }//GEN-LAST:event_CBPreferenciaDisciplinaActionPerformed
+    }// GEN-LAST:event_AlgoritmoComboBoxActionPerformed
 
-    private void CBHorarioFixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBHorarioFixoActionPerformed
+    private void CBHorarioDiferenteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CBHorarioDiferenteActionPerformed
 
-    }//GEN-LAST:event_CBHorarioFixoActionPerformed
+    }// GEN-LAST:event_CBHorarioDiferenteActionPerformed
+
+    private void CBPreferenciaDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CBPreferenciaDisciplinaActionPerformed
+
+    }// GEN-LAST:event_CBPreferenciaDisciplinaActionPerformed
+
+    private void CBHorarioFixoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CBHorarioFixoActionPerformed
+
+    }// GEN-LAST:event_CBHorarioFixoActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -857,7 +869,7 @@ public class TelaIA extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaIA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+        // </editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -885,7 +897,6 @@ public class TelaIA extends javax.swing.JFrame {
     private javax.swing.JTextField TextAddProfessor;
     private javax.swing.JTextField TextPrefMat;
     private javax.swing.JTextField TextPrefMat1;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;

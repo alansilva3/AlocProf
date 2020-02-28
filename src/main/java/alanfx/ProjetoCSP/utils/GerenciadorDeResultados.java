@@ -1,4 +1,4 @@
-package alanfx.ProjetoCSP.utils;
+package alanfx.projetocsp.utils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -9,11 +9,11 @@ import java.util.Set;
 
 import aima.core.search.csp.Assignment;
 import aima.core.search.csp.Variable;
-import alanfx.ProjetoCSP.csp.AlocCSP;
-import alanfx.ProjetoCSP.entidades.BlocoAula;
-import alanfx.ProjetoCSP.entidades.Disciplina;
-import alanfx.ProjetoCSP.entidades.Horario;
-import alanfx.ProjetoCSP.entidades.Professor;
+import alanfx.projetocsp.csp.AlocCSP;
+import alanfx.projetocsp.entidades.BlocoAula;
+import alanfx.projetocsp.entidades.Disciplina;
+import alanfx.projetocsp.entidades.Horario;
+import alanfx.projetocsp.entidades.Professor;
 
 public class GerenciadorDeResultados {
 

@@ -1,4 +1,4 @@
-package alanfx.ProjetoCSP.csp;
+package alanfx.projetocsp.csp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,8 +10,8 @@ import aima.core.search.csp.CSP;
 import aima.core.search.csp.Constraint;
 import aima.core.search.csp.Domain;
 import aima.core.search.csp.Variable;
-import alanfx.ProjetoCSP.entidades.Disciplina;
-import alanfx.ProjetoCSP.entidades.Professor;
+import alanfx.projetocsp.entidades.Disciplina;
+import alanfx.projetocsp.entidades.Professor;
 
 public class AlocCSP extends CSP<Variable, List<String>> {
 
